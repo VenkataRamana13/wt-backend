@@ -2,9 +2,15 @@
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/config/DatabaseConfig.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/config/SecurityConfig.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/controller/AuthController.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/controller/ClientController.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/dto/ClientDTO.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/model/Client.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/model/User.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/repository/ClientRepository.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/repository/UserRepository.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/security/JwtAuthenticationFilter.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/security/JwtUtils.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/service/AuthService.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/service/ClientService.java
 /home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/service/UserDetailsServiceImpl.java
+/home/ramana/wealthTree/wt-platform-backend/src/main/java/com/wtplatform/backend/service/impl/ClientServiceImpl.java
