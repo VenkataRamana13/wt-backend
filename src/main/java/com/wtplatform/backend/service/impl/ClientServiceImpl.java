@@ -99,6 +99,10 @@ public class ClientServiceImpl implements ClientService {
         dto.setRiskProfile(client.getRiskProfile());
         dto.setInvestmentHorizon(client.getInvestmentHorizon());
         dto.setActive(client.isActive());
+        dto.setAum(client.getAum());
+        dto.setCity(client.getCity());
+        dto.setState(client.getState());
+        dto.setPincode(client.getPincode());
         return dto;
     }
 
@@ -110,5 +114,9 @@ public class ClientServiceImpl implements ClientService {
         client.setAddress(dto.getAddress());
         client.setRiskProfile(dto.getRiskProfile());
         client.setInvestmentHorizon(dto.getInvestmentHorizon());
+        client.setAum(dto.getAum());
+        client.setCity(dto.getCity());
+        client.setState(dto.getState());
+        client.setPincode(dto.getPincode());
     }
 } 
