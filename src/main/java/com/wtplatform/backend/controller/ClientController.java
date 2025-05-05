@@ -1,13 +1,25 @@
 package com.wtplatform.backend.controller;
 
 import com.wtplatform.backend.dto.ClientDTO;
+import com.wtplatform.backend.dto.ClientDocumentDTO;
+import com.wtplatform.backend.dto.DocumentUploadResponse;
+import com.wtplatform.backend.dto.ErrorResponse;
 import com.wtplatform.backend.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -74,5 +86,73 @@ public class ClientController {
         logger.debug("Received activate client request for id: {}", id);
         clientService.activateClient(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "/{clientId}/documents", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadDocument(
+            @PathVariable Long clientId,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("documentType") String documentType) {
+        
+        try {
+            logger.info("Document upload request received for client ID: {}, document type: {}", clientId, documentType);
+            
+            if (file.isEmpty()) {
+                return ResponseEntity.badRequest().body(new ErrorResponse("File cannot be empty"));
+            }
+            
+            DocumentUploadResponse response = clientService.uploadDocument(clientId, file, documentType);
+            
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            logger.error("Failed to upload document", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Failed to upload document: " + e.getMessage()));
+        } catch (Exception e) {
+            logger.error("Unexpected error during document upload", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Unexpected error: " + e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/{clientId}/documents")
+    public ResponseEntity<?> getClientDocuments(@PathVariable Long clientId) {
+        try {
+            logger.info("Getting documents for client ID: {}", clientId);
+            List<ClientDocumentDTO> documents = clientService.listClientDocuments(clientId);
+            return ResponseEntity.ok(documents);
+        } catch (Exception e) {
+            logger.error("Failed to get documents for client", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Failed to get client documents: " + e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/{clientId}/documents/{documentType}")
+    public ResponseEntity<?> getClientDocumentsByType(
+            @PathVariable Long clientId,
+            @PathVariable String documentType) {
+        try {
+            logger.info("Getting documents of type '{}' for client ID: {}", documentType, clientId);
+            List<ClientDocumentDTO> documents = clientService.listClientDocumentsByType(clientId, documentType);
+            return ResponseEntity.ok(documents);
+        } catch (Exception e) {
+            logger.error("Failed to get documents for client", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Failed to get client documents: " + e.getMessage()));
+        }
+    }
+    
+    @DeleteMapping("/documents")
+    public ResponseEntity<?> deleteDocument(@RequestParam("fileKey") String fileKey) {
+        try {
+            logger.info("Document delete request received for key: {}", fileKey);
+            clientService.deleteDocument(fileKey);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            logger.error("Failed to delete document", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Failed to delete document: " + e.getMessage()));
+        }
     }
 } 

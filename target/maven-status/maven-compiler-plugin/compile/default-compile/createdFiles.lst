@@ -4,10 +4,7 @@ com/wtplatform/backend/model/Client$ClientBuilder.class
 com/wtplatform/backend/controller/AuthController.class
 com/wtplatform/backend/config/SecurityConfig$1.class
 com/wtplatform/backend/dto/ClientDTO$ClientDTOBuilder.class
-com/wtplatform/backend/controller/ErrorResponse.class
 com/wtplatform/backend/security/JwtUtils.class
-com/wtplatform/backend/controller/RegisterRequest.class
-com/wtplatform/backend/controller/LoginRequest.class
 com/wtplatform/backend/dto/ClientDTO.class
 com/wtplatform/backend/service/UserDetailsServiceImpl.class
 com/wtplatform/backend/repository/UserRepository.class
@@ -15,7 +12,6 @@ com/wtplatform/backend/model/Client.class
 com/wtplatform/backend/BackendApplication.class
 com/wtplatform/backend/config/DatabaseConfig.class
 com/wtplatform/backend/model/User.class
-com/wtplatform/backend/controller/LoginResponse.class
 com/wtplatform/backend/service/AuthService.class
 com/wtplatform/backend/controller/ClientController.class
 com/wtplatform/backend/repository/ClientRepository.class
