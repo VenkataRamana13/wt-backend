@@ -21,6 +21,13 @@ public interface ClientService {
     void activateClient(Long id);
     
     /**
+     * Get the total count of clients
+     * 
+     * @return the total number of clients
+     */
+    long getClientCount();
+    
+    /**
      * Upload a document for a client
      * 
      * @param clientId the ID of the client

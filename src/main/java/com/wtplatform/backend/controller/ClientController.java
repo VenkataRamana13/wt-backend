@@ -74,6 +74,12 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getClientsByRiskProfileAndHorizon(riskProfile, investmentHorizon));
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Long> getClientCount() {
+        logger.debug("Received get client count request");
+        return ResponseEntity.ok(clientService.getClientCount());
+    }
+
     @PostMapping("/{id}/deactivate")
     public ResponseEntity<Void> deactivateClient(@PathVariable Long id) {
         logger.debug("Received deactivate client request for id: {}", id);

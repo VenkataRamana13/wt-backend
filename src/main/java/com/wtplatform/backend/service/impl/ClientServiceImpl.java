@@ -89,6 +89,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public long getClientCount() {
+        return clientRepository.count();
+    }
+
+    @Override
     @Transactional
     public void deactivateClient(Long id) {
         Client client = clientRepository.findById(id)
