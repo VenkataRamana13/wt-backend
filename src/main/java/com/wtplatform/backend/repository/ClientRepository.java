@@ -32,11 +32,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             
     List<Client> findByUserId(Long userId);
     
-    @Query("SELECT c FROM Client c WHERE " +
-           "c.user.id = :userId AND " +
+    @Query("SELECT c FROM Client c WHERE c.user.id = :userId AND (" +
            "LOWER(c.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
            "LOWER(c.pan) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
            "LOWER(c.email) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(c.phone) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
+           "LOWER(c.phone) LIKE LOWER(CONCAT('%', :searchTerm, '%')))")
     List<Client> searchClientsByUser(@Param("userId") Long userId, @Param("searchTerm") String searchTerm);
 } 
