@@ -3,6 +3,8 @@ package com.wtplatform.backend.service;
 import com.wtplatform.backend.dto.ClientDTO;
 import com.wtplatform.backend.dto.ClientDocumentDTO;
 import com.wtplatform.backend.dto.DocumentUploadResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,14 +23,15 @@ public interface ClientService {
     void activateClient(Long id);
     
     /**
-     * Get the total count of clients
+     * Get the total count of clients for the current authenticated user
      * 
-     * @return the total number of clients
+     * @return the total number of clients for the current user
      */
     long getClientCount();
     
     /**
      * Upload a document for a client
+     * Checks if the client belongs to the current user
      * 
      * @param clientId the ID of the client
      * @param file the file to upload
@@ -55,6 +58,7 @@ public interface ClientService {
     
     /**
      * List all documents for a client
+     * Checks if the client belongs to the current user
      * 
      * @param clientId the ID of the client
      * @return a list of client documents
@@ -63,10 +67,20 @@ public interface ClientService {
     
     /**
      * List all documents for a client with a specific document type
+     * Checks if the client belongs to the current user
      * 
      * @param clientId the ID of the client
      * @param documentType the type of document
      * @return a list of client documents of the specified type
      */
     List<ClientDocumentDTO> listClientDocumentsByType(Long clientId, String documentType);
+    
+    /**
+     * Get a paginated list of clients for the current authenticated user
+     * 
+     * @param pageable the pagination information
+     * @param searchTerm optional search term
+     * @return a page of clients for the current user
+     */
+    Page<ClientDTO> getPagedClients(Pageable pageable, String searchTerm);
 } 

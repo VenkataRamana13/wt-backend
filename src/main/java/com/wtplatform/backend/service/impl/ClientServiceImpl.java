@@ -4,12 +4,19 @@ import com.wtplatform.backend.dto.ClientDTO;
 import com.wtplatform.backend.dto.ClientDocumentDTO;
 import com.wtplatform.backend.dto.DocumentUploadResponse;
 import com.wtplatform.backend.model.Client;
+import com.wtplatform.backend.model.User;
 import com.wtplatform.backend.repository.ClientRepository;
+import com.wtplatform.backend.repository.UserRepository;
 import com.wtplatform.backend.service.ClientService;
 import com.wtplatform.backend.service.S3Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +41,47 @@ public class ClientServiceImpl implements ClientService {
     
     @Autowired
     private S3Service s3Service;
+    
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
+     * Get the currently authenticated user
+     * 
+     * @return the current user
+     * @throws RuntimeException if no user is authenticated or user not found
+     */
+    private User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("No authenticated user found");
+        }
+        
+        String email = authentication.getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
+    }
+    
+    /**
+     * Verify the client belongs to the current user
+     * 
+     * @param clientId the client ID
+     * @return the client if it belongs to the current user
+     * @throws RuntimeException if the client doesn't belong to the current user
+     */
+    private Client verifyClientOwnership(Long clientId) {
+        User currentUser = getCurrentUser();
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + clientId));
+        
+        if (!client.getUser().getId().equals(currentUser.getId())) {
+            logger.warn("User {} attempted to access client {} which belongs to user {}", 
+                    currentUser.getId(), clientId, client.getUser().getId());
+            throw new RuntimeException("Access denied: Client does not belong to current user");
+        }
+        
+        return client;
+    }
 
     @Override
     @Transactional
@@ -41,63 +89,74 @@ public class ClientServiceImpl implements ClientService {
         Client client = new Client();
         mapDTOToEntity(clientDTO, client);
         client.setActive(true);
+        
+        // Set the current user as the client's owner
+        client.setUser(getCurrentUser());
+        
         return mapEntityToDTO(clientRepository.save(client));
     }
 
     @Override
     @Transactional
     public ClientDTO updateClient(Long id, ClientDTO clientDTO) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+        // Verify client belongs to current user
+        Client client = verifyClientOwnership(id);
         mapDTOToEntity(clientDTO, client);
         return mapEntityToDTO(clientRepository.save(client));
     }
 
     @Override
     public ClientDTO getClientById(Long id) {
-        return clientRepository.findById(id)
-                .map(this::mapEntityToDTO)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+        // Verify client belongs to current user
+        Client client = verifyClientOwnership(id);
+        return mapEntityToDTO(client);
     }
 
     @Override
     public ClientDTO getClientByPan(String pan) {
+        User currentUser = getCurrentUser();
         return clientRepository.findByPan(pan)
+                .filter(client -> client.getUser().getId().equals(currentUser.getId()))
                 .map(this::mapEntityToDTO)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
     }
 
     @Override
     public List<ClientDTO> getAllClients() {
-        return clientRepository.findAll().stream()
+        User currentUser = getCurrentUser();
+        return clientRepository.findByUserId(currentUser.getId()).stream()
                 .map(this::mapEntityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ClientDTO> searchClients(String searchTerm) {
-        return clientRepository.searchClients(searchTerm).stream()
+        User currentUser = getCurrentUser();
+        return clientRepository.searchClientsByUser(currentUser.getId(), searchTerm).stream()
                 .map(this::mapEntityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ClientDTO> getClientsByRiskProfileAndHorizon(String riskProfile, String investmentHorizon) {
+        User currentUser = getCurrentUser();
         return clientRepository.findByRiskProfileAndInvestmentHorizon(riskProfile, investmentHorizon).stream()
+                .filter(client -> client.getUser().getId().equals(currentUser.getId()))
                 .map(this::mapEntityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public long getClientCount() {
-        return clientRepository.count();
+        User currentUser = getCurrentUser();
+        return clientRepository.findByUserId(currentUser.getId()).size();
     }
 
     @Override
     @Transactional
     public void deactivateClient(Long id) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+        // Verify client belongs to current user
+        Client client = verifyClientOwnership(id);
         client.setActive(false);
         clientRepository.save(client);
     }
@@ -105,8 +164,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public void activateClient(Long id) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+        // Verify client belongs to current user
+        Client client = verifyClientOwnership(id);
         client.setActive(true);
         clientRepository.save(client);
     }
@@ -114,9 +173,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public DocumentUploadResponse uploadDocument(Long clientId, MultipartFile file, String documentType) throws IOException {
-        // Verify client exists
-        Client client = clientRepository.findById(clientId)
-                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + clientId));
+        // Verify client belongs to current user
+        Client client = verifyClientOwnership(clientId);
         
         logger.info("Uploading document type '{}' for client ID: {}", documentType, clientId);
         
@@ -153,9 +211,8 @@ public class ClientServiceImpl implements ClientService {
     public List<ClientDocumentDTO> listClientDocuments(Long clientId) {
         logger.info("Listing all documents for client ID: {}", clientId);
         
-        // Verify client exists
-        clientRepository.findById(clientId)
-                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + clientId));
+        // Verify client belongs to current user
+        verifyClientOwnership(clientId);
         
         String prefix = String.format("clients/%d/documents/", clientId);
         List<S3Object> s3Objects = s3Service.listObjects(prefix);
@@ -167,14 +224,35 @@ public class ClientServiceImpl implements ClientService {
     public List<ClientDocumentDTO> listClientDocumentsByType(Long clientId, String documentType) {
         logger.info("Listing documents of type '{}' for client ID: {}", documentType, clientId);
         
-        // Verify client exists
-        clientRepository.findById(clientId)
-                .orElseThrow(() -> new RuntimeException("Client not found with ID: " + clientId));
+        // Verify client belongs to current user
+        verifyClientOwnership(clientId);
         
         String prefix = String.format("clients/%d/documents/%s/", clientId, documentType);
         List<S3Object> s3Objects = s3Service.listObjects(prefix);
         
         return mapS3ObjectsToDocumentDTOs(s3Objects, clientId);
+    }
+    
+    @Override
+    public Page<ClientDTO> getPagedClients(Pageable pageable, String searchTerm) {
+        User currentUser = getCurrentUser();
+        List<Client> clients;
+        
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            clients = clientRepository.searchClientsByUser(currentUser.getId(), searchTerm);
+        } else {
+            clients = clientRepository.findByUserId(currentUser.getId());
+        }
+        
+        // Manual pagination (not ideal but works for this example)
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), clients.size());
+        
+        List<ClientDTO> clientDTOs = clients.subList(start, end).stream()
+                .map(this::mapEntityToDTO)
+                .collect(Collectors.toList());
+        
+        return new PageImpl<>(clientDTOs, pageable, clients.size());
     }
     
     private List<ClientDocumentDTO> mapS3ObjectsToDocumentDTOs(List<S3Object> s3Objects, Long clientId) {
