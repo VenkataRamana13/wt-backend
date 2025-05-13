@@ -38,7 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         logger.debug("Processing request: " + requestURI + " [" + request.getMethod() + "]");
-        logger.debug("Authorization header: " + request.getHeader("Authorization"));
+        String authHeader = request.getHeader("Authorization");
+        logger.debug("Authorization header: " + (authHeader != null ? "Bearer [REDACTED]" : "null"));
         
         try {
             String jwt = parseJwt(request);
@@ -46,11 +47,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (jwt != null) {
                 logger.debug("JWT token found in request");
                 String username = jwtUtils.extractUsername(jwt);
+                logger.debug("Extracted username from JWT: " + username);
                 
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    logger.debug("Loading UserDetails for username: " + username);
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                    logger.debug("UserDetails loaded: " + userDetails);
+                    logger.debug("UserDetails class: " + userDetails.getClass().getName());
+                    logger.debug("Authorities: " + userDetails.getAuthorities());
                     
                     if (jwtUtils.validateToken(jwt, userDetails)) {
+                        logger.debug("JWT token validated successfully for username: " + username);
+                        
+                        // IMPORTANT DEBUG: Log what's being set as the principal
+                        logger.debug("Setting principal in SecurityContext. UserDetails class: " + 
+                                    userDetails.getClass().getName());
+                        logger.debug("Principal to string: " + userDetails.toString());
+                        
                         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.getAuthorities());
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -58,8 +71,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         // Important: Set the authentication BEFORE continuing the filter chain
                         SecurityContextHolder.getContext().setAuthentication(authToken);
                         logger.debug("Authentication set in SecurityContext for user: " + username);
+                        logger.debug("Authentication principal class: " + 
+                                    SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
                     } else {
                         logger.warn("JWT token validation failed for token: " + jwt.substring(0, 10) + "...");
+                    }
+                } else {
+                    if (username == null) {
+                        logger.warn("Username could not be extracted from JWT");
+                    }
+                    if (SecurityContextHolder.getContext().getAuthentication() != null) {
+                        logger.debug("SecurityContext already contains Authentication");
                     }
                 }
             } else {
@@ -68,6 +90,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             logger.error("Cannot process JWT token: " + e.getMessage(), e);
             // Do not throw exception - let the security chain handle it
+        }
+        
+        // Log authentication status before continuing
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            logger.debug("SecurityContext contains Authentication: " + 
+                        SecurityContextHolder.getContext().getAuthentication());
+            logger.debug("Authentication principal class: " + 
+                        SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
+        } else {
+            logger.debug("No Authentication in SecurityContext");
         }
         
         // Always continue the filter chain

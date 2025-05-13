@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -159,6 +162,26 @@ public class ClientController {
             logger.error("Failed to delete document", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("Failed to delete document: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<ClientDTO>> getPagedClients(
+            @RequestParam(required = false) String searchTerm,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size) {
+        logger.debug("Received paged clients request with searchTerm: {}, page: {}, size: {}", 
+                searchTerm, page, size);
+        
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            Page<ClientDTO> result = clientService.getPagedClients(pageable, searchTerm);
+            // Page will always have a non-null content array (could be empty)
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            logger.error("Error retrieving paged clients", e);
+            // Return an empty page rather than an error to ensure frontend gets a valid response structure
+            return ResponseEntity.ok(Page.empty(PageRequest.of(page, size)));
         }
     }
 } 
