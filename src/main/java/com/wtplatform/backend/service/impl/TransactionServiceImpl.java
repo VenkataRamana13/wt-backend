@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -235,15 +236,31 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public TransactionDTO addTransaction(TransactionDTO transactionDTO) {
-        log.info("Adding new transaction for client ID: {} of type: {}", 
-            transactionDTO.getClientId(), transactionDTO.getType());
+        log.info("Transaction creation initiated - Type: {}, Amount: {}, ClientId: {}, Date: {}", 
+            transactionDTO.getType(), 
+            transactionDTO.getAmount(),
+            transactionDTO.getClientId(),
+            transactionDTO.getDate());
             
         try {
             // Check if the client exists and belongs to the current user
             Long clientId = transactionDTO.getClientId();
-            Client client = validateClientAccess(clientId);
+            log.debug("Validating client access for clientId: {}", clientId);
+            
+            Client client;
+            try {
+                client = validateClientAccess(clientId);
+                log.debug("Client validation successful. Client name: {}", client.getName());
+            } catch (EntityNotFoundException e) {
+                log.error("Client not found during transaction creation - ClientId: {}", clientId);
+                throw e;
+            } catch (SecurityException e) {
+                log.error("Security violation during transaction creation - ClientId: {} is not accessible to the current user", clientId);
+                throw e;
+            }
             
             // Create new transaction entity
+            log.debug("Creating transaction entity");
             Transaction transaction = Transaction.builder()
                     .client(client)
                     .type(transactionDTO.getType())
@@ -254,13 +271,23 @@ public class TransactionServiceImpl implements TransactionService {
                     .build();
             
             // Save the transaction
+            log.debug("Saving transaction to the database");
             Transaction savedTransaction = transactionRepository.save(transaction);
-            log.info("Successfully saved transaction with ID: {} for client ID: {}", 
-                savedTransaction.getId(), client.getId());
+            log.info("Transaction created successfully - ID: {}, Type: {}, Amount: {}, ClientId: {}, ClientName: {}", 
+                savedTransaction.getId(), 
+                savedTransaction.getType(), 
+                savedTransaction.getAmount(),
+                client.getId(),
+                client.getName());
                 
             return TransactionDTO.fromEntity(savedTransaction);
         } catch (Exception e) {
-            log.error("Error adding transaction for client ID: {}", transactionDTO.getClientId(), e);
+            if (!(e instanceof EntityNotFoundException || e instanceof SecurityException)) {
+                log.error("Unexpected error during transaction creation - Type: {}, ClientId: {}, Error: {}", 
+                    transactionDTO.getType(), 
+                    transactionDTO.getClientId(),
+                    e.getMessage(), e);
+            }
             throw e;
         }
     }
@@ -397,6 +424,30 @@ public class TransactionServiceImpl implements TransactionService {
         } catch (ClassCastException e) {
             log.error("Failed to cast Authentication principal to User", e);
             throw new SecurityException("Failed to cast Authentication principal to User", e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionDTO> getRecentTransactions(int limit) {
+        log.info("Getting {} most recent transactions", limit);
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        try {
+            Long userId = getUserIdFromAuth(auth);
+            
+            // Use Spring's Pageable to limit results
+            Pageable pageable = PageRequest.of(0, limit);
+            
+            // Get transactions in reverse chronological order
+            List<Transaction> recentTransactions = transactionRepository.findByUserIdOrderByDateDesc(userId, pageable);
+            log.info("Found {} recent transactions for user ID: {}", recentTransactions.size(), userId);
+            
+            return TransactionDTO.fromEntities(recentTransactions);
+        } catch (Exception e) {
+            log.error("Error getting recent transactions", e);
+            throw e;
         }
     }
 } 

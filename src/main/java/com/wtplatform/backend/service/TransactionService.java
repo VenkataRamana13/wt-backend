@@ -36,6 +36,9 @@ public interface TransactionService {
     // Get transactions by client ID and date range
     List<TransactionDTO> getTransactionsByClientIdAndDateRange(Long clientId, LocalDate startDate, LocalDate endDate);
     
+    // Get recent transactions (most recent first)
+    List<TransactionDTO> getRecentTransactions(int limit);
+    
     // Add a new transaction
     TransactionDTO addTransaction(TransactionDTO transactionDTO);
     

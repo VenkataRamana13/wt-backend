@@ -48,6 +48,18 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Page<Transaction> findByUserId(@Param("userId") Long userId, Pageable pageable);
     
     /**
+     * Find transactions for clients belonging to a specific user ordered by date (descending)
+     */
+    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.date DESC")
+    List<Transaction> findByUserIdOrderByDateDesc(@Param("userId") Long userId);
+    
+    /**
+     * Find limited number of transactions for clients belonging to a specific user ordered by date (descending)
+     */
+    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.date DESC")
+    List<Transaction> findByUserIdOrderByDateDesc(@Param("userId") Long userId, Pageable pageable);
+    
+    /**
      * Find all transactions with a specific status
      */
     List<Transaction> findByStatus(String status);

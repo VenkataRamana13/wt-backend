@@ -4,6 +4,8 @@ import com.wtplatform.backend.dto.TransactionDTO;
 import com.wtplatform.backend.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,20 +25,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionController {
 
+    private static final Logger log = LoggerFactory.getLogger(TransactionController.class);
     private final TransactionService transactionService;
 
     @GetMapping
     public ResponseEntity<List<TransactionDTO>> getAllTransactions() {
+        log.debug("Getting all transactions");
         return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TransactionDTO> getTransactionById(@PathVariable Long id) {
+        log.debug("Getting transaction with ID: {}", id);
         return ResponseEntity.ok(transactionService.getTransactionById(id));
     }
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<List<TransactionDTO>> getTransactionsByClientId(@PathVariable Long clientId) {
+        log.debug("Getting transactions for client ID: {}", clientId);
         return ResponseEntity.ok(transactionService.getTransactionsByClientId(clientId));
     }
 
@@ -89,7 +97,24 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<TransactionDTO> addTransaction(@Valid @RequestBody TransactionDTO transactionDTO) {
-        return new ResponseEntity<>(transactionService.addTransaction(transactionDTO), HttpStatus.CREATED);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Transaction creation request received - Type: {}, Amount: {}, ClientId: {}, User: {}", 
+            transactionDTO.getType(), 
+            transactionDTO.getAmount(),
+            transactionDTO.getClientId(),
+            auth != null ? auth.getName() : "unknown");
+        
+        try {
+            TransactionDTO result = transactionService.addTransaction(transactionDTO);
+            log.info("Transaction successfully created with ID: {}", result.getId());
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("Transaction creation failed - Type: {}, ClientId: {}, Error: {}", 
+                transactionDTO.getType(), 
+                transactionDTO.getClientId(),
+                e.getMessage(), e);
+            throw e;
+        }
     }
 
     @PutMapping("/{id}")
@@ -97,11 +122,13 @@ public class TransactionController {
             @PathVariable Long id,
             @Valid @RequestBody TransactionDTO transactionDTO
     ) {
+        log.debug("Updating transaction with ID: {}", id);
         return ResponseEntity.ok(transactionService.updateTransaction(id, transactionDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
+        log.debug("Deleting transaction with ID: {}", id);
         transactionService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
     }
