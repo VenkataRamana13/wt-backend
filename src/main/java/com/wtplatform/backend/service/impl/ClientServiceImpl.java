@@ -26,7 +26,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -318,35 +321,155 @@ public class ClientServiceImpl implements ClientService {
         return documentDTOs;
     }
 
+    /**
+     * Map a Client entity to a ClientDTO
+     */
     private ClientDTO mapEntityToDTO(Client client) {
-        ClientDTO dto = new ClientDTO();
-        dto.setId(client.getId());
-        dto.setName(client.getName());
-        dto.setPan(client.getPan());
-        dto.setEmail(client.getEmail());
-        dto.setPhone(client.getPhone());
-        dto.setAddress(client.getAddress());
-        dto.setRiskProfile(client.getRiskProfile());
-        dto.setInvestmentHorizon(client.getInvestmentHorizon());
-        dto.setActive(client.isActive());
-        dto.setAum(client.getAum());
-        dto.setCity(client.getCity());
-        dto.setState(client.getState());
-        dto.setPincode(client.getPincode());
-        return dto;
+        return ClientDTO.builder()
+                .id(client.getId())
+                .name(client.getName())
+                .pan(client.getPan())
+                .email(client.getEmail())
+                .phone(client.getPhone())
+                .aum(client.getAum())
+                .address(client.getAddress())
+                .city(client.getCity())
+                .state(client.getState())
+                .pincode(client.getPincode())
+                .riskProfile(client.getRiskProfile())
+                .investmentHorizon(client.getInvestmentHorizon())
+                .isActive(client.isActive())
+                .build();
     }
 
+    /**
+     * Map a ClientDTO to a Client entity
+     */
     private void mapDTOToEntity(ClientDTO dto, Client client) {
         client.setName(dto.getName());
         client.setPan(dto.getPan());
         client.setEmail(dto.getEmail());
         client.setPhone(dto.getPhone());
-        client.setAddress(dto.getAddress());
-        client.setRiskProfile(dto.getRiskProfile());
-        client.setInvestmentHorizon(dto.getInvestmentHorizon());
         client.setAum(dto.getAum());
+        client.setAddress(dto.getAddress());
         client.setCity(dto.getCity());
         client.setState(dto.getState());
         client.setPincode(dto.getPincode());
+        client.setRiskProfile(dto.getRiskProfile());
+        client.setInvestmentHorizon(dto.getInvestmentHorizon());
+        client.setActive(dto.isActive());
+    }
+    
+    @Override
+    @Transactional
+    public List<ClientDTO> importClientsFromCSV(MultipartFile file) throws IOException {
+        logger.debug("Importing clients from CSV file");
+        
+        // Get current user
+        User currentUser = getCurrentUser();
+        
+        // Read CSV content
+        String content = new String(file.getBytes());
+        String[] lines = content.split("\n");
+        
+        // Check if file is empty
+        if (lines.length <= 1) {
+            throw new IOException("CSV file is empty or contains only headers");
+        }
+        
+        // Parse header line
+        String[] headers = lines[0].trim().split(",");
+        
+        // Required columns for client import
+        List<String> requiredColumns = Arrays.asList(
+                "name", "pan", "email", "phone", "aum", "address", 
+                "city", "state", "pincode", "riskProfile", "investmentHorizon"
+        );
+        
+        // Validate headers
+        for (String required : requiredColumns) {
+            boolean found = false;
+            for (String header : headers) {
+                if (header.trim().equalsIgnoreCase(required)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                throw new IOException("Missing required column: " + required);
+            }
+        }
+        
+        List<ClientDTO> importedClients = new ArrayList<>();
+        
+        // Process each data row (starting from index 1 to skip header)
+        for (int i = 1; i < lines.length; i++) {
+            String line = lines[i].trim();
+            if (line.isEmpty()) continue; // Skip empty lines
+            
+            String[] values = line.split(",");
+            
+            // Validate row has correct number of columns
+            if (values.length != headers.length) {
+                throw new IOException("Line " + (i + 1) + " has incorrect number of values");
+            }
+            
+            // Create map of column name to value
+            Map<String, String> rowData = new HashMap<>();
+            for (int j = 0; j < headers.length; j++) {
+                rowData.put(headers[j].trim().toLowerCase(), values[j].trim());
+            }
+            
+            // Create ClientDTO from row data
+            ClientDTO clientDTO = new ClientDTO();
+            clientDTO.setName(rowData.get("name"));
+            clientDTO.setPan(rowData.get("pan"));
+            clientDTO.setEmail(rowData.get("email"));
+            clientDTO.setPhone(rowData.get("phone"));
+            
+            try {
+                clientDTO.setAum(Double.parseDouble(rowData.get("aum")));
+            } catch (NumberFormatException e) {
+                throw new IOException("Invalid AUM value on line " + (i + 1) + ": " + rowData.get("aum"));
+            }
+            
+            clientDTO.setAddress(rowData.get("address"));
+            clientDTO.setCity(rowData.get("city"));
+            clientDTO.setState(rowData.get("state"));
+            clientDTO.setPincode(rowData.get("pincode"));
+            clientDTO.setRiskProfile(rowData.get("riskprofile"));
+            clientDTO.setInvestmentHorizon(rowData.get("investmenthorizon"));
+            clientDTO.setActive(true);
+            
+            // Create and save the client
+            try {
+                // Create new client entity
+                Client client = new Client();
+                mapDTOToEntity(clientDTO, client);
+                client.setActive(true);
+                client.setUser(currentUser);
+                
+                // Check if client with same PAN or email already exists
+                if (clientRepository.findByPan(client.getPan()).isPresent()) {
+                    throw new IOException("Client with PAN " + client.getPan() + " already exists");
+                }
+                
+                if (clientRepository.findByEmail(client.getEmail()).isPresent()) {
+                    throw new IOException("Client with email " + client.getEmail() + " already exists");
+                }
+                
+                // Save client
+                Client savedClient = clientRepository.save(client);
+                importedClients.add(mapEntityToDTO(savedClient));
+            } catch (Exception e) {
+                if (e instanceof IOException) {
+                    throw e;
+                }
+                throw new IOException("Error importing client on line " + (i + 1) + ": " + e.getMessage());
+            }
+        }
+        
+        logger.info("Successfully imported {} clients", importedClients.size());
+        return importedClients;
     }
 } 

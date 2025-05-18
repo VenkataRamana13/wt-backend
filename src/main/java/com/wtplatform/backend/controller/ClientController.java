@@ -184,4 +184,26 @@ public class ClientController {
             return ResponseEntity.ok(Page.empty(PageRequest.of(page, size)));
         }
     }
+    
+    @PostMapping("/import")
+    public ResponseEntity<?> importClientsFromCSV(
+            @RequestParam("file") MultipartFile file) {
+        logger.debug("Received import clients CSV request");
+        
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("Empty file"));
+        }
+        
+        if (!file.getOriginalFilename().endsWith(".csv")) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("Only CSV files are supported"));
+        }
+        
+        try {
+            List<ClientDTO> importedClients = clientService.importClientsFromCSV(file);
+            return ResponseEntity.ok(importedClients);
+        } catch (Exception e) {
+            logger.error("Error importing clients from CSV", e);
+            return ResponseEntity.badRequest().body(new ErrorResponse("Failed to import clients: " + e.getMessage()));
+        }
+    }
 } 

@@ -83,4 +83,14 @@ public interface ClientService {
      * @return a page of clients for the current user
      */
     Page<ClientDTO> getPagedClients(Pageable pageable, String searchTerm);
+    
+    /**
+     * Import clients from a CSV file
+     * Each row in the CSV will be converted to a client record
+     * 
+     * @param file the CSV file to import
+     * @return a list of the imported clients
+     * @throws IOException if there's an issue with the file
+     */
+    List<ClientDTO> importClientsFromCSV(MultipartFile file) throws IOException;
 } 
