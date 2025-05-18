@@ -3,6 +3,7 @@ package com.wtplatform.backend.service;
 import com.wtplatform.backend.dto.TransactionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,4 +48,7 @@ public interface TransactionService {
     
     // Delete a transaction
     void deleteTransaction(Long id);
+    
+    // Import transactions from CSV file
+    List<TransactionDTO> importFromCSV(MultipartFile file);
 } 

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -131,5 +132,18 @@ public class TransactionController {
         log.debug("Deleting transaction with ID: {}", id);
         transactionService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/import")
+    public ResponseEntity<List<TransactionDTO>> importFromCSV(@RequestParam("file") MultipartFile file) {
+        log.info("Received request to import transactions from CSV file: {}", file.getOriginalFilename());
+        try {
+            List<TransactionDTO> importedTransactions = transactionService.importFromCSV(file);
+            log.info("Successfully imported {} transactions from CSV", importedTransactions.size());
+            return new ResponseEntity<>(importedTransactions, HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("Error importing transactions from CSV: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 } 

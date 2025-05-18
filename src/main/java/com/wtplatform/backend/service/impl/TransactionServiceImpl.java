@@ -9,6 +9,9 @@ import com.wtplatform.backend.repository.TransactionRepository;
 import com.wtplatform.backend.service.TransactionService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,9 +22,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -449,5 +462,140 @@ public class TransactionServiceImpl implements TransactionService {
             log.error("Error getting recent transactions", e);
             throw e;
         }
+    }
+
+    @Override
+    @Transactional
+    public List<TransactionDTO> importFromCSV(MultipartFile file) {
+        log.info("Starting CSV import for transactions");
+        
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("Uploaded file is empty");
+        }
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
+            
+            Long userId = getUserIdFromAuth(SecurityContextHolder.getContext().getAuthentication());
+            
+            // Create a map of clientId to Client entity for quick access
+            List<Client> userClients = clientRepository.findByUserId(userId);
+            Map<Long, Client> clientMap = new HashMap<>();
+            for (Client client : userClients) {
+                clientMap.put(client.getId(), client);
+            }
+            
+            List<Transaction> importedTransactions = new ArrayList<>();
+            List<String> errors = new ArrayList<>();
+            
+            for (CSVRecord record : csvParser) {
+                try {
+                    // Extract required fields
+                    String clientIdStr = record.get("clientId");
+                    String clientName = record.get("clientName"); // Used for validation
+                    String type = record.get("type");
+                    String amountStr = record.get("amount");
+                    String dateStr = record.get("date");
+                    String status = record.get("status");
+                    
+                    // Get description if it exists
+                    String description = record.isMapped("description") ? record.get("description") : null;
+                    
+                    // Validate and convert types
+                    Long clientId;
+                    try {
+                        clientId = Long.parseLong(clientIdStr);
+                    } catch (NumberFormatException e) {
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid client ID: " + clientIdStr);
+                        continue;
+                    }
+                    
+                    // Ensure client exists and belongs to the current user
+                    Client client = clientMap.get(clientId);
+                    if (client == null) {
+                        errors.add("Row " + record.getRecordNumber() + ": Client with ID " + clientId + " not found or access denied");
+                        continue;
+                    }
+                    
+                    // Validate transaction type
+                    if (!isValidTransactionType(type)) {
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid transaction type: " + type);
+                        continue;
+                    }
+                    
+                    // Parse amount
+                    BigDecimal amount;
+                    try {
+                        amount = new BigDecimal(amountStr);
+                    } catch (NumberFormatException e) {
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid amount: " + amountStr);
+                        continue;
+                    }
+                    
+                    // Parse date
+                    LocalDate date;
+                    try {
+                        date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+                    } catch (DateTimeParseException e) {
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid date format: " + dateStr + ". Use yyyy-MM-dd format.");
+                        continue;
+                    }
+                    
+                    // Validate status
+                    if (!isValidStatus(status)) {
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid status: " + status);
+                        continue;
+                    }
+                    
+                    // Create and add transaction
+                    Transaction transaction = new Transaction();
+                    transaction.setClient(client);
+                    transaction.setType(type);
+                    transaction.setAmount(amount);
+                    transaction.setDate(date);
+                    transaction.setStatus(status);
+                    transaction.setDescription(description);
+                    
+                    importedTransactions.add(transaction);
+                    
+                } catch (Exception e) {
+                    errors.add("Row " + record.getRecordNumber() + ": Error processing record: " + e.getMessage());
+                }
+            }
+            
+            // If there are errors, log them and throw an exception
+            if (!errors.isEmpty()) {
+                String errorMessage = String.join("\n", errors);
+                log.error("CSV import errors: {}", errorMessage);
+                throw new IllegalArgumentException("CSV import failed with errors:\n" + errorMessage);
+            }
+            
+            // Save all transactions
+            List<Transaction> savedTransactions = transactionRepository.saveAll(importedTransactions);
+            log.info("Successfully imported {} transactions", savedTransactions.size());
+            
+            return TransactionDTO.fromEntities(savedTransactions);
+            
+        } catch (IOException e) {
+            log.error("Error reading CSV file: {}", e.getMessage(), e);
+            throw new RuntimeException("Error reading CSV file: " + e.getMessage(), e);
+        }
+    }
+    
+    private boolean isValidTransactionType(String type) {
+        return type != null && (
+            "SIP".equalsIgnoreCase(type) || 
+            "STP".equalsIgnoreCase(type) || 
+            "SWP".equalsIgnoreCase(type) || 
+            "LUMPSUM".equalsIgnoreCase(type)
+        );
+    }
+    
+    private boolean isValidStatus(String status) {
+        return status != null && (
+            "completed".equalsIgnoreCase(status) || 
+            "pending".equalsIgnoreCase(status) || 
+            "failed".equalsIgnoreCase(status)
+        );
     }
 } 
