@@ -95,4 +95,30 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      */
     @Query("SELECT SUM(t.amount) FROM Transaction t WHERE t.client.id = :clientId AND t.type = :type")
     BigDecimal sumAmountByClientIdAndType(@Param("clientId") Long clientId, @Param("type") String type);
+    
+    /**
+     * Find all transactions with a specific type after a specific date
+     */
+    List<Transaction> findByTypeAndDateAfter(String type, LocalDate date);
+    
+    /**
+     * Find all transactions with a specific type and status
+     */
+    List<Transaction> findByTypeAndStatus(String type, String status);
+    
+    /**
+     * Find all transactions with a specific type where next execution date is today
+     */
+    List<Transaction> findByTypeAndNextExecutionDate(String type, LocalDate date);
+    
+    /**
+     * Find all transactions with a specific type where expiry date is before a specific date
+     */
+    List<Transaction> findByTypeAndExpiryDateBefore(String type, LocalDate date);
+    
+    /**
+     * Find all transactions with a specific type that have zero source balance
+     */
+    @Query("SELECT t FROM Transaction t WHERE t.type = :type AND t.sourceBalance = 0")
+    List<Transaction> findByTypeAndZeroSourceBalance(@Param("type") String type);
 } 

@@ -37,10 +37,32 @@ public class Transaction {
     private LocalDate date;
 
     @Column(nullable = false)
-    private String status; // completed, pending, failed
+    private String status; // completed, pending, failed, active
 
     @Column(columnDefinition = "TEXT")
     private String description;
+    
+    // Fields for STP/SIP functionality
+    @Column
+    private String frequency; // Monthly, Quarterly, etc.
+    
+    @Column
+    private LocalDate nextExecutionDate;
+    
+    @Column
+    private LocalDate expiryDate;
+    
+    @Column(precision = 15, scale = 2)
+    private BigDecimal remainingAmount;
+    
+    @Column(precision = 15, scale = 2)
+    private BigDecimal sourceBalance;
+    
+    @Column
+    private String fromScheme; // For STP: source fund/scheme
+    
+    @Column
+    private String toScheme; // For STP: target fund/scheme
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
