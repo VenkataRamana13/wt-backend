@@ -212,7 +212,7 @@ public class TransactionServiceImpl implements TransactionService {
             Long userId = getUserIdFromAuth(auth);
             
             // First get transactions by date range
-            List<Transaction> allTransactionsByDateRange = transactionRepository.findByDateBetween(startDate, endDate);
+            List<Transaction> allTransactionsByDateRange = transactionRepository.findByTransactionDateBetween(startDate, endDate);
             log.info("Found {} transactions between {} and {}", 
                 allTransactionsByDateRange.size(), startDate, endDate);
                 
@@ -239,7 +239,7 @@ public class TransactionServiceImpl implements TransactionService {
         // Check if the client belongs to the current user
         validateClientAccess(clientId);
         
-        List<Transaction> transactions = transactionRepository.findByClientIdAndDateBetween(clientId, startDate, endDate);
+        List<Transaction> transactions = transactionRepository.findByClientIdAndTransactionDateBetween(clientId, startDate, endDate);
         log.info("Found {} transactions for client ID: {} between {} and {}", 
             transactions.size(), clientId, startDate, endDate);
             
@@ -253,7 +253,7 @@ public class TransactionServiceImpl implements TransactionService {
             transactionDTO.getType(), 
             transactionDTO.getAmount(),
             transactionDTO.getClientId(),
-            transactionDTO.getDate());
+            transactionDTO.getTransactionDate());
             
         try {
             // Check if the client exists and belongs to the current user
@@ -278,9 +278,9 @@ public class TransactionServiceImpl implements TransactionService {
                     .client(client)
                     .type(transactionDTO.getType())
                     .amount(transactionDTO.getAmount())
-                    .date(transactionDTO.getDate())
+                    .transactionDate(transactionDTO.getTransactionDate())
                     .status(transactionDTO.getStatus())
-                    .description(transactionDTO.getDescription())
+                    .remarks(transactionDTO.getRemarks())
                     .build();
             
             // Save the transaction
@@ -325,9 +325,9 @@ public class TransactionServiceImpl implements TransactionService {
         existingTransaction.setClient(client);
         existingTransaction.setType(transactionDTO.getType());
         existingTransaction.setAmount(transactionDTO.getAmount());
-        existingTransaction.setDate(transactionDTO.getDate());
+        existingTransaction.setTransactionDate(transactionDTO.getTransactionDate());
         existingTransaction.setStatus(transactionDTO.getStatus());
-        existingTransaction.setDescription(transactionDTO.getDescription());
+        existingTransaction.setRemarks(transactionDTO.getRemarks());
         
         // Save the updated transaction
         Transaction updatedTransaction = transactionRepository.save(existingTransaction);
@@ -454,7 +454,7 @@ public class TransactionServiceImpl implements TransactionService {
             Pageable pageable = PageRequest.of(0, limit);
             
             // Get transactions in reverse chronological order
-            List<Transaction> recentTransactions = transactionRepository.findByUserIdOrderByDateDesc(userId, pageable);
+            List<Transaction> recentTransactions = transactionRepository.findByUserIdOrderByTransactionDateDesc(userId, pageable);
             log.info("Found {} recent transactions for user ID: {}", recentTransactions.size(), userId);
             
             return TransactionDTO.fromEntities(recentTransactions);
@@ -552,9 +552,9 @@ public class TransactionServiceImpl implements TransactionService {
                     transaction.setClient(client);
                     transaction.setType(type);
                     transaction.setAmount(amount);
-                    transaction.setDate(date);
-                    transaction.setStatus(status);
-                    transaction.setDescription(description);
+                    transaction.setTransactionDate(date);
+                    transaction.setStatus("PENDING");
+                    transaction.setRemarks(description);
                     
                     importedTransactions.add(transaction);
                     

@@ -1,6 +1,7 @@
 package com.wtplatform.backend.repository;
 
 import com.wtplatform.backend.model.Transaction;
+import com.wtplatform.backend.dto.StpTrendDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,7 +34,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     /**
      * Find all transactions for a specific client within a date range
      */
-    List<Transaction> findByClientIdAndDateBetween(Long clientId, LocalDate startDate, LocalDate endDate);
+    List<Transaction> findByClientIdAndTransactionDateBetween(Long clientId, LocalDate startDate, LocalDate endDate);
     
     /**
      * Find all transactions for clients belonging to a specific user
@@ -50,14 +51,14 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     /**
      * Find transactions for clients belonging to a specific user ordered by date (descending)
      */
-    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.date DESC")
-    List<Transaction> findByUserIdOrderByDateDesc(@Param("userId") Long userId);
+    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.transactionDate DESC")
+    List<Transaction> findByUserIdOrderByTransactionDateDesc(@Param("userId") Long userId);
     
     /**
      * Find limited number of transactions for clients belonging to a specific user ordered by date (descending)
      */
-    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.date DESC")
-    List<Transaction> findByUserIdOrderByDateDesc(@Param("userId") Long userId, Pageable pageable);
+    @Query("SELECT t FROM Transaction t JOIN t.client c WHERE c.user.id = :userId ORDER BY t.transactionDate DESC")
+    List<Transaction> findByUserIdOrderByTransactionDateDesc(@Param("userId") Long userId, Pageable pageable);
     
     /**
      * Find all transactions with a specific status
@@ -72,7 +73,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     /**
      * Find all transactions within a date range
      */
-    List<Transaction> findByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Transaction> findByTransactionDateBetween(LocalDate startDate, LocalDate endDate);
     
     /**
      * Find all transactions for a specific client with a specific status
@@ -95,4 +96,66 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      */
     @Query("SELECT SUM(t.amount) FROM Transaction t WHERE t.client.id = :clientId AND t.type = :type")
     BigDecimal sumAmountByClientIdAndType(@Param("clientId") Long clientId, @Param("type") String type);
+
+    @Query("SELECT COUNT(t) FROM Transaction t " +
+           "WHERE t.client.user.id = :userId " +
+           "AND t.type = 'STP' " +
+           "AND t.status = 'ACTIVE' " +
+           "AND t.endDate > CURRENT_DATE")
+    Long countActiveStpsByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT COUNT(t) FROM Transaction t " +
+           "WHERE t.client.user.id = :userId " +
+           "AND t.type = 'STP' " +
+           "AND t.nextTransactionDate = :today " +
+           "AND t.status = 'ACTIVE'")
+    Long countStpsExecutingToday(@Param("userId") Long userId, @Param("today") LocalDate today);
+
+    @Query("SELECT COUNT(t) FROM Transaction t " +
+           "WHERE t.client.user.id = :userId " +
+           "AND t.type = 'STP' " +
+           "AND t.endDate BETWEEN :startDate AND :endDate " +
+           "AND t.status = 'ACTIVE'")
+    Long countStpsExpiringBetween(@Param("userId") Long userId, 
+                                 @Param("startDate") LocalDate startDate,
+                                 @Param("endDate") LocalDate endDate);
+
+    @Query("SELECT COUNT(t) FROM Transaction t " +
+           "WHERE t.client.user.id = :userId " +
+           "AND t.type = 'STP' " +
+           "AND t.status = 'ACTIVE' " +
+           "AND NOT EXISTS (SELECT 1 FROM FundBalance fb " +
+           "               WHERE fb.fundId = t.fromFund " +
+           "               AND fb.balance >= t.amount)")
+    Long countStpsWithZeroBalance(@Param("userId") Long userId);
+
+    // Commented out problematic JPQL query
+    /*
+    @Query("SELECT new com.wtplatform.backend.dto.StpTrendDTO(" +
+           "    FUNCTION('DATE_FORMAT', t.transactionDate, '%Y-%m') as month, " +
+           "    CAST(SUM(t.amount) AS big_decimal)) " +
+           "FROM Transaction t " +
+           "WHERE t.client.user.id = :userId " +
+           "AND t.type = 'STP' " +
+           "AND t.status = 'COMPLETED' " +
+           "GROUP BY FUNCTION('DATE_FORMAT', t.transactionDate, '%Y-%m') " +
+           "ORDER BY month DESC")
+    List<StpTrendDTO> getMonthlyStpTrends(@Param("userId") Long userId);
+    */
+
+    // Additional helper methods for STP operations
+    @Query("SELECT t FROM Transaction t " +
+           "WHERE t.type = 'STP' " +
+           "AND t.status = 'ACTIVE' " +
+           "AND t.nextTransactionDate <= CURRENT_DATE")
+    List<Transaction> findPendingStpTransactions();
+
+    @Query("SELECT t FROM Transaction t " +
+           "WHERE t.type = 'STP' " +
+           "AND t.client.user.id = :userId " +
+           "AND t.status = 'ACTIVE'")
+    List<Transaction> findActiveStpsByUserId(@Param("userId") Long userId);
+
+    @Query(value = "SELECT DATE_FORMAT(t.transaction_date, '%Y-%m'), SUM(t.amount) FROM transactions t WHERE t.client_id = :userId AND t.type = 'STP' AND t.status = 'COMPLETED' GROUP BY DATE_FORMAT(t.transaction_date, '%Y-%m')", nativeQuery = true)
+    List<Object[]> getMonthlyStpTrendsNative(@Param("userId") Long userId);
 } 

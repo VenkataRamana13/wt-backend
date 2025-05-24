@@ -33,12 +33,12 @@ public class TransactionDTO {
     private BigDecimal amount;
     
     @NotNull(message = "Date is required")
-    private LocalDate date;
+    private LocalDate transactionDate;
     
     @NotBlank(message = "Status is required")
     private String status;
     
-    private String description;
+    private String remarks;
     
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -60,9 +60,9 @@ public class TransactionDTO {
                 .clientName(transaction.getClient().getName())
                 .type(transaction.getType())
                 .amount(transaction.getAmount())
-                .date(transaction.getDate())
+                .transactionDate(transaction.getTransactionDate())
                 .status(transaction.getStatus())
-                .description(transaction.getDescription())
+                .remarks(transaction.getRemarks())
                 .createdAt(transaction.getCreatedAt())
                 .updatedAt(transaction.getUpdatedAt())
                 .build();

@@ -1,6 +1,7 @@
 package com.wtplatform.backend.controller;
 
 import com.wtplatform.backend.dto.StpSummaryDTO;
+import com.wtplatform.backend.model.Transaction;
 import com.wtplatform.backend.service.StpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,11 @@ public class StpController {
     public ResponseEntity<Void> processStpTransaction(@RequestBody Transaction transaction) {
         stpService.processStpTransaction(transaction);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/debug-types/{userId}")
+    public ResponseEntity<String> debugTypes(@PathVariable Long userId) {
+        stpService.debugStpTrendTypes(userId);
+        return ResponseEntity.ok("Check logs for type information");
     }
 } 
