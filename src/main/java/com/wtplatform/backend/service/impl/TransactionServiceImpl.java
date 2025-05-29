@@ -477,6 +477,7 @@ public class TransactionServiceImpl implements TransactionService {
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
             
             Long userId = getUserIdFromAuth(SecurityContextHolder.getContext().getAuthentication());
+            log.debug("Processing CSV import for user ID: {}", userId);
             
             // Create a map of clientId to Client entity for quick access
             List<Client> userClients = clientRepository.findByUserId(userId);
@@ -484,22 +485,45 @@ public class TransactionServiceImpl implements TransactionService {
             for (Client client : userClients) {
                 clientMap.put(client.getId(), client);
             }
+            log.debug("Found {} clients for user ID {}", userClients.size(), userId);
             
             List<Transaction> importedTransactions = new ArrayList<>();
             List<String> errors = new ArrayList<>();
             
             for (CSVRecord record : csvParser) {
+                log.debug("Processing row {}", record.getRecordNumber());
                 try {
                     // Extract required fields
                     String clientIdStr = record.get("clientId");
-                    String clientName = record.get("clientName"); // Used for validation
                     String type = record.get("type");
                     String amountStr = record.get("amount");
-                    String dateStr = record.get("date");
+                    String transactionDateStr = record.get("transactionDate");
                     String status = record.get("status");
                     
-                    // Get description if it exists
-                    String description = record.isMapped("description") ? record.get("description") : null;
+                    // Extract optional fields with debug logging
+                    String startDateStr = record.isMapped("startDate") ? record.get("startDate") : null;
+                    log.debug("Row {}: startDate value from CSV: '{}'", record.getRecordNumber(), startDateStr);
+                    
+                    String endDateStr = record.isMapped("endDate") ? record.get("endDate") : null;
+                    log.debug("Row {}: endDate value from CSV: '{}'", record.getRecordNumber(), endDateStr);
+                    
+                    String nextTransactionDateStr = record.isMapped("nextTransactionDate") ? record.get("nextTransactionDate") : null;
+                    log.debug("Row {}: nextTransactionDate value from CSV: '{}'", record.getRecordNumber(), nextTransactionDateStr);
+                    
+                    // Extract other optional fields
+                    String fundName = record.isMapped("fundName") ? record.get("fundName") : null;
+                    String fromFund = record.isMapped("fromFund") ? record.get("fromFund") : null;
+                    String toFund = record.isMapped("toFund") ? record.get("toFund") : null;
+                    String frequency = record.isMapped("frequency") ? record.get("frequency") : null;
+                    String installmentNumberStr = record.isMapped("installmentNumber") ? record.get("installmentNumber") : null;
+                    String totalInstallmentsStr = record.isMapped("totalInstallments") ? record.get("totalInstallments") : null;
+                    String isRecurringStr = record.isMapped("isRecurring") ? record.get("isRecurring") : null;
+                    String schemeCode = record.isMapped("schemeCode") ? record.get("schemeCode") : null;
+                    String assetClass = record.isMapped("assetClass") ? record.get("assetClass") : null;
+                    String unitsStr = record.isMapped("units") ? record.get("units") : null;
+                    String navAtTransactionTimeStr = record.isMapped("navAtTransactionTime") ? record.get("navAtTransactionTime") : null;
+                    String mode = record.isMapped("mode") ? record.get("mode") : null;
+                    String remarks = record.isMapped("remarks") ? record.get("remarks") : null;
                     
                     // Validate and convert types
                     Long clientId;
@@ -532,12 +556,15 @@ public class TransactionServiceImpl implements TransactionService {
                         continue;
                     }
                     
-                    // Parse date
-                    LocalDate date;
+                    // Parse transaction date with debug logging
+                    LocalDate transactionDate;
                     try {
-                        date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+                        log.debug("Row {}: Parsing transaction date: '{}'", record.getRecordNumber(), transactionDateStr);
+                        transactionDate = LocalDate.parse(transactionDateStr, DateTimeFormatter.ISO_DATE);
+                        log.debug("Row {}: Successfully parsed transaction date to: {}", record.getRecordNumber(), transactionDate);
                     } catch (DateTimeParseException e) {
-                        errors.add("Row " + record.getRecordNumber() + ": Invalid date format: " + dateStr + ". Use yyyy-MM-dd format.");
+                        log.error("Row {}: Failed to parse transaction date '{}'. Error: {}", record.getRecordNumber(), transactionDateStr, e.getMessage());
+                        errors.add("Row " + record.getRecordNumber() + ": Invalid transaction date format: " + transactionDateStr + ". Use yyyy-MM-dd format.");
                         continue;
                     }
                     
@@ -547,18 +574,180 @@ public class TransactionServiceImpl implements TransactionService {
                         continue;
                     }
                     
-                    // Create and add transaction
+                    // Create transaction
                     Transaction transaction = new Transaction();
                     transaction.setClient(client);
                     transaction.setType(type);
                     transaction.setAmount(amount);
-                    transaction.setTransactionDate(date);
-                    transaction.setStatus("PENDING");
-                    transaction.setRemarks(description);
+                    transaction.setTransactionDate(transactionDate);
+                    transaction.setStatus(status);
+                    transaction.setFundName(fundName);
+                    transaction.setFromFund(fromFund);
+                    transaction.setToFund(toFund);
+                    transaction.setFrequency(frequency);
+                    transaction.setRemarks(remarks);
+                    transaction.setMode(mode);
+                    transaction.setSchemeCode(schemeCode);
+                    transaction.setAssetClass(assetClass);
+                    
+                    // Parse optional dates with debug logging
+                    if (startDateStr != null && !startDateStr.trim().isEmpty()) {
+                        try {
+                            log.debug("Row {}: Parsing start date: '{}'", record.getRecordNumber(), startDateStr);
+                            LocalDate startDate = LocalDate.parse(startDateStr.trim(), DateTimeFormatter.ISO_DATE);
+                            transaction.setStartDate(startDate);
+                            log.debug("Row {}: Successfully parsed start date to: {}", record.getRecordNumber(), startDate);
+                        } catch (DateTimeParseException e) {
+                            log.error("Row {}: Failed to parse start date '{}'. Error: {}", record.getRecordNumber(), startDateStr, e.getMessage());
+                            errors.add("Row " + record.getRecordNumber() + ": Invalid start date format: " + startDateStr);
+                            continue;
+                        }
+                    }
+                    
+                    if (endDateStr != null && !endDateStr.trim().isEmpty()) {
+                        try {
+                            log.debug("Row {}: Parsing end date: '{}'", record.getRecordNumber(), endDateStr);
+                            LocalDate endDate = LocalDate.parse(endDateStr.trim(), DateTimeFormatter.ISO_DATE);
+                            transaction.setEndDate(endDate);
+                            log.debug("Row {}: Successfully parsed end date to: {}", record.getRecordNumber(), endDate);
+                        } catch (DateTimeParseException e) {
+                            log.error("Row {}: Failed to parse end date '{}'. Error: {}", record.getRecordNumber(), endDateStr, e.getMessage());
+                            errors.add("Row " + record.getRecordNumber() + ": Invalid end date format: " + endDateStr);
+                            continue;
+                        }
+                    }
+                    
+                    if (nextTransactionDateStr != null && !nextTransactionDateStr.trim().isEmpty()) {
+                        try {
+                            log.debug("Row {}: Parsing next transaction date: '{}'", record.getRecordNumber(), nextTransactionDateStr);
+                            LocalDate nextTransactionDate = LocalDate.parse(nextTransactionDateStr.trim(), DateTimeFormatter.ISO_DATE);
+                            transaction.setNextTransactionDate(nextTransactionDate);
+                            log.debug("Row {}: Successfully parsed next transaction date to: {}", record.getRecordNumber(), nextTransactionDate);
+                        } catch (DateTimeParseException e) {
+                            log.error("Row {}: Failed to parse next transaction date '{}'. Error: {}", record.getRecordNumber(), nextTransactionDateStr, e.getMessage());
+                            errors.add("Row " + record.getRecordNumber() + ": Invalid next transaction date format: " + nextTransactionDateStr);
+                            continue;
+                        }
+                    }
+                    
+                    // Parse optional numeric fields
+                    if (installmentNumberStr != null) {
+                        log.debug("Row {}: Processing installment number value: '{}', length: {}", 
+                            record.getRecordNumber(), 
+                            installmentNumberStr,
+                            installmentNumberStr.length());
+                            
+                        // Debug each character to check for hidden characters
+                        if (!installmentNumberStr.isEmpty()) {
+                            StringBuilder charDebug = new StringBuilder();
+                            for (char c : installmentNumberStr.toCharArray()) {
+                                charDebug.append(String.format("[%c:0x%02X]", c, (int) c));
+                            }
+                            log.debug("Row {}: Installment number characters: {}", 
+                                record.getRecordNumber(), 
+                                charDebug.toString());
+                        }
+                        
+                        String trimmedValue = installmentNumberStr.trim();
+                        log.debug("Row {}: Trimmed installment number: '{}', length: {}", 
+                            record.getRecordNumber(), 
+                            trimmedValue,
+                            trimmedValue.length());
+                            
+                        if (!trimmedValue.isEmpty()) {
+                            try {
+                                int installmentNum = Integer.parseInt(trimmedValue);
+                                transaction.setInstallmentNumber(installmentNum);
+                                log.debug("Row {}: Successfully parsed installment number: {}", 
+                                    record.getRecordNumber(), 
+                                    installmentNum);
+                            } catch (NumberFormatException e) {
+                                String errorMsg = String.format("Row %d: Invalid installment number: '%s' (original: '%s')", 
+                                    record.getRecordNumber(), 
+                                    trimmedValue, 
+                                    installmentNumberStr);
+                                log.error(errorMsg);
+                                errors.add(errorMsg);
+                                continue;
+                            }
+                        } else {
+                            log.debug("Row {}: Empty installment number after trim, skipping", 
+                                record.getRecordNumber());
+                        }
+                    }
+                    
+                    if (totalInstallmentsStr != null) {
+                        log.debug("Row {}: Processing total installments value: '{}', length: {}", 
+                            record.getRecordNumber(), 
+                            totalInstallmentsStr,
+                            totalInstallmentsStr.length());
+                            
+                        // Debug each character to check for hidden characters
+                        if (!totalInstallmentsStr.isEmpty()) {
+                            StringBuilder charDebug = new StringBuilder();
+                            for (char c : totalInstallmentsStr.toCharArray()) {
+                                charDebug.append(String.format("[%c:0x%02X]", c, (int) c));
+                            }
+                            log.debug("Row {}: Total installments characters: {}", 
+                                record.getRecordNumber(), 
+                                charDebug.toString());
+                        }
+                        
+                        String trimmedValue = totalInstallmentsStr.trim();
+                        log.debug("Row {}: Trimmed total installments: '{}', length: {}", 
+                            record.getRecordNumber(), 
+                            trimmedValue,
+                            trimmedValue.length());
+                            
+                        if (!trimmedValue.isEmpty()) {
+                            try {
+                                int totalInstallments = Integer.parseInt(trimmedValue);
+                                transaction.setTotalInstallments(totalInstallments);
+                                log.debug("Row {}: Successfully parsed total installments: {}", 
+                                    record.getRecordNumber(), 
+                                    totalInstallments);
+                            } catch (NumberFormatException e) {
+                                String errorMsg = String.format("Row %d: Invalid total installments: '%s' (original: '%s')", 
+                                    record.getRecordNumber(), 
+                                    trimmedValue, 
+                                    totalInstallmentsStr);
+                                log.error(errorMsg);
+                                errors.add(errorMsg);
+                                continue;
+                            }
+                        } else {
+                            log.debug("Row {}: Empty total installments after trim, skipping", 
+                                record.getRecordNumber());
+                        }
+                    }
+                    
+                    if (unitsStr != null) {
+                        try {
+                            transaction.setUnits(new BigDecimal(unitsStr));
+                        } catch (NumberFormatException e) {
+                            errors.add("Row " + record.getRecordNumber() + ": Invalid units: " + unitsStr);
+                            continue;
+                        }
+                    }
+                    
+                    if (navAtTransactionTimeStr != null) {
+                        try {
+                            transaction.setNavAtTransactionTime(new BigDecimal(navAtTransactionTimeStr));
+                        } catch (NumberFormatException e) {
+                            errors.add("Row " + record.getRecordNumber() + ": Invalid NAV: " + navAtTransactionTimeStr);
+                            continue;
+                        }
+                    }
+                    
+                    if (isRecurringStr != null) {
+                        transaction.setIsRecurring(Boolean.parseBoolean(isRecurringStr));
+                    }
                     
                     importedTransactions.add(transaction);
+                    log.debug("Row {}: Successfully processed transaction", record.getRecordNumber());
                     
                 } catch (Exception e) {
+                    log.error("Row {}: Unexpected error while processing record: {}", record.getRecordNumber(), e.getMessage(), e);
                     errors.add("Row " + record.getRecordNumber() + ": Error processing record: " + e.getMessage());
                 }
             }

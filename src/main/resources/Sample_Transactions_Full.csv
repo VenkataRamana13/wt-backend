@@ -1,0 +1,501 @@
+clientId,type,amount,transactionDate,status,fundName,fromFund,toFund,frequency,startDate,endDate,nextTransactionDate,installmentNumber,totalInstallments,isRecurring,schemeCode,assetClass,units,navAtTransactionTime,mode,remarks
+130,SIP,6783.26,2023-08-26,Failed,ABC Equity Fund,,,Monthly,2023-08-26,2024-08-25,2023-09-25,10,21,True,SC1363,Debt,334.23,20.3,Offline,Transaction remark 1
+140,STP,35097.23,2024-05-02,Completed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Quarterly,2024-05-02,2025-05-02,2024-06-01,11,17,True,SC9149,Equity,454.98,77.14,Online,Transaction remark 2
+128,SIP,39897.15,2024-09-02,Completed,ABC Equity Fund,,,Yearly,2024-09-02,2025-09-02,2024-10-02,2,21,True,SC4861,Debt,284.65,140.16,Online,Transaction remark 3
+88,STP,94852.9,2024-04-28,Completed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Quarterly,2024-04-28,2025-04-28,2024-05-28,11,13,True,SC3859,Cash,1302.25,72.84,Offline,Transaction remark 4
+96,STP,25095.62,2023-07-17,Failed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Quarterly,2023-07-17,2024-07-16,2023-08-16,4,19,True,SC1305,Debt,138.29,181.47,Offline,Transaction remark 5
+124,STP,60089.25,2023-06-11,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Quarterly,2023-06-11,2024-06-10,2023-07-11,10,14,True,SC8896,Debt,379.28,158.43,Offline,Transaction remark 6
+107,SIP,81938.64,2025-01-29,Pending,PQR Liquid Fund,,,Yearly,2025-01-29,2026-01-29,2025-02-28,1,17,True,SC1573,Cash,3817.42,21.46,Online,Transaction remark 7
+102,SWP,65551.07,2024-07-12,Pending,DEF Balanced Fund,,,,,,,,,False,SC1895,Equity,2987.12,21.94,Offline,Transaction remark 8
+99,STP,80582.49,2023-02-27,Completed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Monthly,2023-02-27,2024-02-27,2023-03-29,5,34,True,SC4789,Debt,490.68,164.23,Offline,Transaction remark 9
+115,STP,97694.38,2023-10-06,Completed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Monthly,2023-10-06,2024-10-05,2023-11-05,9,26,True,SC3650,Debt,494.57,197.53,Offline,Transaction remark 10
+108,STP,16534.65,2024-10-11,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2024-10-11,2025-10-11,2024-11-10,12,28,True,SC6703,Cash,992.09,16.67,Online,Transaction remark 11
+96,STP,55398.66,2024-03-21,Pending,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2024-03-21,2025-03-21,2024-04-20,4,23,True,SC2072,Debt,349.05,158.71,Offline,Transaction remark 12
+127,STP,93704.6,2023-01-12,Completed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Yearly,2023-01-12,2024-01-12,2023-02-11,2,31,True,SC9938,Equity,776.97,120.6,Online,Transaction remark 13
+98,SIP,78307.24,2024-08-05,Failed,DEF Balanced Fund,,,Quarterly,2024-08-05,2025-08-05,2024-09-04,3,30,True,SC6247,Debt,727.46,107.64,Online,Transaction remark 14
+121,SIP,97511.48,2023-03-29,Failed,PQR Liquid Fund,,,Monthly,2023-03-29,2024-03-28,2023-04-28,6,18,True,SC9056,Equity,1579.85,61.72,Online,Transaction remark 15
+114,SWP,68494.34,2024-02-02,Failed,DEF Balanced Fund,,,,,,,,,False,SC2309,Cash,696.26,98.37,Offline,Transaction remark 16
+110,SIP,72365.31,2023-03-22,Failed,ABC Equity Fund,,,Monthly,2023-03-22,2024-03-21,2023-04-21,1,15,True,SC8942,Cash,838.01,86.35,Online,Transaction remark 17
+84,SWP,36611.2,2024-12-24,Failed,DEF Balanced Fund,,,,,,,,,False,SC7378,Cash,627.77,58.32,Online,Transaction remark 18
+105,SIP,95885.71,2023-08-16,Pending,ABC Equity Fund,,,Quarterly,2023-08-16,2024-08-15,2023-09-15,12,24,True,SC9993,Debt,548.72,174.74,Online,Transaction remark 19
+104,SIP,51280.11,2023-11-23,Completed,DEF Balanced Fund,,,Yearly,2023-11-23,2024-11-22,2023-12-23,4,15,True,SC1858,Debt,1665.75,30.78,Offline,Transaction remark 20
+131,SWP,3266.76,2024-04-05,Failed,ABC Equity Fund,,,,,,,,,False,SC2664,Debt,23.31,140.14,Offline,Transaction remark 21
+138,SIP,43934.77,2024-04-11,Completed,DEF Balanced Fund,,,Yearly,2024-04-11,2025-04-11,2024-05-11,11,27,True,SC7650,Equity,364.85,120.42,Online,Transaction remark 22
+109,LUMPSUM,8815.81,2023-12-20,Failed,ABC Equity Fund,,,,,,,,,False,SC8628,Debt,58.21,151.45,Offline,Transaction remark 23
+103,STP,15548.96,2023-04-06,Pending,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2023-04-06,2024-04-05,2023-05-06,9,23,True,SC1910,Debt,239.98,64.79,Offline,Transaction remark 24
+116,STP,18613.19,2023-06-30,Pending,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Monthly,2023-06-30,2024-06-29,2023-07-30,7,28,True,SC5845,Cash,191.49,97.2,Offline,Transaction remark 25
+109,SWP,99060.24,2024-05-16,Pending,PQR Liquid Fund,,,,,,,,,False,SC1302,Cash,630.85,157.03,Online,Transaction remark 26
+105,STP,90990.94,2023-10-12,Pending,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2023-10-12,2024-10-11,2023-11-11,2,30,True,SC6550,Cash,1866.82,48.74,Offline,Transaction remark 27
+85,LUMPSUM,51192.76,2023-10-04,Completed,ABC Equity Fund,,,,,,,,,False,SC8184,Debt,1691.41,30.27,Offline,Transaction remark 28
+115,SIP,14105.13,2023-07-11,Failed,PQR Liquid Fund,,,Quarterly,2023-07-11,2024-07-10,2023-08-10,1,13,True,SC7173,Debt,205.52,68.63,Online,Transaction remark 29
+94,SIP,18806.83,2023-02-16,Failed,XYZ Debt Fund,,,Monthly,2023-02-16,2024-02-16,2023-03-18,4,31,True,SC3563,Equity,663.83,28.33,Offline,Transaction remark 30
+100,LUMPSUM,18976.74,2023-07-21,Failed,PQR Liquid Fund,,,,,,,,,False,SC1341,Cash,148.48,127.81,Offline,Transaction remark 31
+130,STP,45087.82,2023-11-24,Pending,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2023-11-24,2024-11-23,2023-12-24,2,22,True,SC7883,Equity,307.26,146.74,Online,Transaction remark 32
+93,SIP,12370.44,2024-05-17,Pending,ABC Equity Fund,,,Yearly,2024-05-17,2025-05-17,2024-06-16,10,35,True,SC5019,Cash,184.59,67.02,Offline,Transaction remark 33
+92,LUMPSUM,69215.0,2025-04-16,Completed,DEF Balanced Fund,,,,,,,,,False,SC7758,Debt,6883.55,10.06,Offline,Transaction remark 34
+81,STP,52591.28,2025-01-18,Failed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Yearly,2025-01-18,2026-01-18,2025-02-17,10,24,True,SC4824,Cash,2332.14,22.55,Offline,Transaction remark 35
+126,SWP,11239.64,2025-05-09,Failed,XYZ Debt Fund,,,,,,,,,False,SC2522,Debt,131.8,85.28,Offline,Transaction remark 36
+81,SIP,29918.36,2023-04-14,Pending,XYZ Debt Fund,,,Yearly,2023-04-14,2024-04-13,2023-05-14,11,29,True,SC8027,Equity,225.5,132.68,Offline,Transaction remark 37
+136,SIP,80716.46,2023-03-27,Pending,DEF Balanced Fund,,,Quarterly,2023-03-27,2024-03-26,2023-04-26,5,13,True,SC8693,Cash,703.56,114.73,Offline,Transaction remark 38
+131,LUMPSUM,42597.59,2023-11-23,Pending,PQR Liquid Fund,,,,,,,,,False,SC5411,Debt,967.74,44.02,Offline,Transaction remark 39
+116,SIP,17772.25,2023-02-05,Pending,DEF Balanced Fund,,,Quarterly,2023-02-05,2024-02-05,2023-03-07,5,15,True,SC8738,Cash,240.21,73.99,Online,Transaction remark 40
+129,SWP,5321.53,2024-10-26,Completed,XYZ Debt Fund,,,,,,,,,False,SC4524,Cash,178.92,29.74,Online,Transaction remark 41
+121,SIP,13221.2,2023-01-19,Failed,XYZ Debt Fund,,,Yearly,2023-01-19,2024-01-19,2023-02-18,4,23,True,SC4129,Debt,265.67,49.77,Online,Transaction remark 42
+126,STP,91997.74,2023-03-12,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2023-03-12,2024-03-11,2023-04-11,1,34,True,SC5490,Debt,4302.92,21.38,Online,Transaction remark 43
+92,SWP,59929.75,2025-05-14,Completed,PQR Liquid Fund,,,,,,,,,False,SC7346,Debt,708.54,84.58,Offline,Transaction remark 44
+127,LUMPSUM,97942.41,2024-04-12,Pending,ABC Equity Fund,,,,,,,,,False,SC1080,Debt,757.69,129.26,Online,Transaction remark 45
+102,SWP,41561.59,2023-04-17,Failed,XYZ Debt Fund,,,,,,,,,False,SC4788,Debt,501.81,82.82,Offline,Transaction remark 46
+123,SIP,11902.47,2024-11-24,Completed,DEF Balanced Fund,,,Monthly,2024-11-24,2025-11-24,2024-12-24,2,13,True,SC3766,Cash,94.86,125.47,Offline,Transaction remark 47
+135,SIP,69388.23,2023-01-13,Failed,XYZ Debt Fund,,,Yearly,2023-01-13,2024-01-13,2023-02-12,11,20,True,SC7137,Equity,2144.64,32.35,Online,Transaction remark 48
+105,SIP,76342.92,2024-05-15,Pending,DEF Balanced Fund,,,Monthly,2024-05-15,2025-05-15,2024-06-14,10,26,True,SC6704,Debt,964.47,79.16,Offline,Transaction remark 49
+125,SIP,64829.05,2023-09-05,Completed,DEF Balanced Fund,,,Monthly,2023-09-05,2024-09-04,2023-10-05,9,16,True,SC5256,Equity,551.35,117.58,Offline,Transaction remark 50
+133,SWP,63241.44,2025-01-24,Pending,ABC Equity Fund,,,,,,,,,False,SC5431,Equity,410.6,154.02,Online,Transaction remark 51
+130,STP,73589.01,2025-05-01,Failed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Monthly,2025-05-01,2026-05-01,2025-05-31,11,23,True,SC1285,Cash,936.48,78.58,Offline,Transaction remark 52
+122,LUMPSUM,32195.59,2024-07-23,Completed,DEF Balanced Fund,,,,,,,,,False,SC7414,Equity,211.53,152.2,Offline,Transaction remark 53
+128,STP,28236.91,2024-11-06,Completed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2024-11-06,2025-11-06,2024-12-06,6,35,True,SC2259,Debt,316.79,89.13,Online,Transaction remark 54
+139,STP,55269.76,2025-03-05,Failed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Monthly,2025-03-05,2026-03-05,2025-04-04,12,23,True,SC3877,Equity,458.69,120.49,Offline,Transaction remark 55
+111,SWP,87462.7,2025-01-18,Failed,DEF Balanced Fund,,,,,,,,,False,SC8697,Equity,2039.69,42.88,Offline,Transaction remark 56
+85,SWP,53328.16,2025-05-08,Failed,PQR Liquid Fund,,,,,,,,,False,SC7971,Equity,512.36,104.08,Offline,Transaction remark 57
+114,SWP,48203.19,2025-01-14,Failed,PQR Liquid Fund,,,,,,,,,False,SC7952,Equity,491.75,98.02,Offline,Transaction remark 58
+86,SIP,49985.27,2023-02-03,Pending,ABC Equity Fund,,,Monthly,2023-02-03,2024-02-03,2023-03-05,10,15,True,SC4920,Debt,1059.33,47.19,Online,Transaction remark 59
+136,SWP,41647.04,2025-03-16,Pending,ABC Equity Fund,,,,,,,,,False,SC2958,Debt,675.85,61.62,Online,Transaction remark 60
+80,SIP,54959.64,2024-05-16,Failed,XYZ Debt Fund,,,Quarterly,2024-05-16,2025-05-16,2024-06-15,11,28,True,SC9376,Cash,910.15,60.39,Offline,Transaction remark 61
+124,SWP,4432.85,2025-04-20,Failed,XYZ Debt Fund,,,,,,,,,False,SC1934,Equity,26.81,165.34,Offline,Transaction remark 62
+140,LUMPSUM,24164.69,2023-11-30,Failed,PQR Liquid Fund,,,,,,,,,False,SC9797,Equity,208.06,116.14,Offline,Transaction remark 63
+128,STP,45981.81,2025-03-19,Completed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Yearly,2025-03-19,2026-03-19,2025-04-18,5,32,True,SC5398,Cash,256.68,179.14,Offline,Transaction remark 64
+102,STP,35230.49,2024-04-21,Completed,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Yearly,2024-04-21,2025-04-21,2024-05-21,7,22,True,SC4235,Cash,344.89,102.15,Online,Transaction remark 65
+133,STP,60748.44,2024-02-22,Completed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Monthly,2024-02-22,2025-02-21,2024-03-23,8,29,True,SC6215,Cash,768.11,79.09,Online,Transaction remark 66
+131,SIP,32089.72,2024-10-12,Pending,DEF Balanced Fund,,,Monthly,2024-10-12,2025-10-12,2024-11-11,6,36,True,SC6482,Debt,215.01,149.25,Online,Transaction remark 67
+140,SWP,70043.33,2024-11-17,Completed,PQR Liquid Fund,,,,,,,,,False,SC4171,Equity,947.47,73.93,Online,Transaction remark 68
+85,SIP,89450.27,2023-09-07,Completed,ABC Equity Fund,,,Monthly,2023-09-07,2024-09-06,2023-10-07,2,21,True,SC2705,Cash,547.7,163.32,Offline,Transaction remark 69
+93,LUMPSUM,76525.37,2023-12-03,Completed,DEF Balanced Fund,,,,,,,,,False,SC6759,Cash,471.98,162.14,Offline,Transaction remark 70
+85,LUMPSUM,74528.21,2025-04-17,Pending,DEF Balanced Fund,,,,,,,,,False,SC4389,Equity,383.51,194.33,Online,Transaction remark 71
+88,LUMPSUM,34179.69,2023-06-07,Failed,DEF Balanced Fund,,,,,,,,,False,SC9729,Equity,745.3,45.86,Online,Transaction remark 72
+133,SWP,9313.36,2024-12-16,Failed,DEF Balanced Fund,,,,,,,,,False,SC3438,Debt,125.87,73.99,Online,Transaction remark 73
+94,STP,90041.12,2024-10-21,Pending,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Monthly,2024-10-21,2025-10-21,2024-11-20,7,19,True,SC5397,Cash,2431.49,37.03,Offline,Transaction remark 74
+128,SWP,20417.46,2024-05-05,Pending,DEF Balanced Fund,,,,,,,,,False,SC3308,Cash,271.08,75.32,Offline,Transaction remark 75
+133,STP,66244.72,2024-05-07,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2024-05-07,2025-05-07,2024-06-06,10,29,True,SC2450,Debt,2981.12,22.22,Online,Transaction remark 76
+116,SWP,19312.65,2023-08-02,Failed,DEF Balanced Fund,,,,,,,,,False,SC6598,Cash,472.6,40.86,Online,Transaction remark 77
+100,LUMPSUM,56419.17,2023-12-19,Failed,ABC Equity Fund,,,,,,,,,False,SC9254,Debt,407.69,138.39,Offline,Transaction remark 78
+115,SWP,72472.4,2024-12-27,Failed,XYZ Debt Fund,,,,,,,,,False,SC7743,Debt,1210.52,59.87,Online,Transaction remark 79
+80,SIP,71416.41,2024-07-22,Failed,ABC Equity Fund,,,Quarterly,2024-07-22,2025-07-22,2024-08-21,6,17,True,SC1738,Equity,460.76,155.0,Online,Transaction remark 80
+99,LUMPSUM,71340.44,2024-07-18,Completed,ABC Equity Fund,,,,,,,,,False,SC3151,Debt,376.12,189.67,Offline,Transaction remark 81
+138,SWP,23435.51,2023-05-30,Pending,ABC Equity Fund,,,,,,,,,False,SC7871,Debt,324.59,72.2,Offline,Transaction remark 82
+130,SWP,68134.75,2024-01-12,Pending,PQR Liquid Fund,,,,,,,,,False,SC9429,Cash,384.12,177.38,Online,Transaction remark 83
+84,STP,18304.52,2025-03-17,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Yearly,2025-03-17,2026-03-17,2025-04-16,2,18,True,SC3102,Cash,127.01,144.12,Offline,Transaction remark 84
+82,STP,71321.3,2023-09-30,Failed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Yearly,2023-09-30,2024-09-29,2023-10-30,1,13,True,SC3819,Debt,1839.32,38.78,Offline,Transaction remark 85
+111,STP,78454.16,2023-06-04,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2023-06-04,2024-06-03,2023-07-04,6,31,True,SC6021,Cash,3175.85,24.7,Offline,Transaction remark 86
+84,SIP,49366.89,2023-03-01,Failed,ABC Equity Fund,,,Quarterly,2023-03-01,2024-02-29,2023-03-31,3,21,True,SC4970,Cash,865.59,57.03,Offline,Transaction remark 87
+97,LUMPSUM,89716.76,2024-03-27,Failed,PQR Liquid Fund,,,,,,,,,False,SC1061,Debt,566.33,158.42,Offline,Transaction remark 88
+88,LUMPSUM,91712.66,2023-12-10,Pending,PQR Liquid Fund,,,,,,,,,False,SC8162,Equity,560.35,163.67,Online,Transaction remark 89
+139,STP,30519.0,2025-01-04,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Yearly,2025-01-04,2026-01-04,2025-02-03,3,25,True,SC5095,Debt,2310.52,13.21,Offline,Transaction remark 90
+123,SWP,33459.79,2025-01-29,Failed,ABC Equity Fund,,,,,,,,,False,SC9309,Debt,237.01,141.17,Offline,Transaction remark 91
+85,LUMPSUM,10244.29,2023-04-13,Completed,DEF Balanced Fund,,,,,,,,,False,SC9625,Equity,56.77,180.45,Offline,Transaction remark 92
+104,STP,67475.76,2024-08-05,Failed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Monthly,2024-08-05,2025-08-05,2024-09-04,1,15,True,SC1580,Equity,339.64,198.67,Offline,Transaction remark 93
+97,SIP,21774.75,2023-11-28,Failed,PQR Liquid Fund,,,Monthly,2023-11-28,2024-11-27,2023-12-28,9,25,True,SC4993,Debt,1189.38,18.31,Offline,Transaction remark 94
+104,SWP,35149.21,2024-08-11,Completed,ABC Equity Fund,,,,,,,,,False,SC7780,Debt,278.2,126.35,Offline,Transaction remark 95
+102,LUMPSUM,55092.28,2024-08-25,Pending,XYZ Debt Fund,,,,,,,,,False,SC1486,Debt,631.09,87.3,Offline,Transaction remark 96
+96,SWP,9721.19,2023-11-27,Pending,DEF Balanced Fund,,,,,,,,,False,SC6240,Debt,59.01,164.74,Offline,Transaction remark 97
+87,SWP,74207.23,2024-06-29,Pending,ABC Equity Fund,,,,,,,,,False,SC6889,Equity,447.83,165.7,Offline,Transaction remark 98
+104,STP,11571.4,2023-12-25,Pending,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2023-12-25,2024-12-24,2024-01-24,2,28,True,SC2598,Cash,364.47,31.75,Offline,Transaction remark 99
+100,STP,62546.2,2025-04-22,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Quarterly,2025-04-22,2026-04-22,2025-05-22,10,28,True,SC6963,Equity,429.06,145.77,Online,Transaction remark 100
+93,LUMPSUM,98213.56,2023-12-15,Completed,PQR Liquid Fund,,,,,,,,,False,SC3748,Equity,8297.46,11.84,Offline,Transaction remark 101
+86,STP,19466.3,2023-06-08,Completed,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Monthly,2023-06-08,2024-06-07,2023-07-08,5,27,True,SC1281,Cash,830.56,23.44,Offline,Transaction remark 102
+105,SIP,98748.78,2025-02-07,Completed,DEF Balanced Fund,,,Quarterly,2025-02-07,2026-02-07,2025-03-09,3,30,True,SC9506,Debt,2275.48,43.4,Online,Transaction remark 103
+89,SWP,34767.57,2024-03-15,Pending,PQR Liquid Fund,,,,,,,,,False,SC2835,Debt,258.26,134.62,Online,Transaction remark 104
+85,STP,5461.35,2023-01-21,Pending,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Monthly,2023-01-21,2024-01-21,2023-02-20,3,30,True,SC6333,Cash,87.65,62.31,Online,Transaction remark 105
+105,STP,17442.66,2024-11-10,Pending,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2024-11-10,2025-11-10,2024-12-10,9,34,True,SC8937,Debt,209.6,83.22,Online,Transaction remark 106
+101,SWP,45376.81,2023-10-23,Pending,ABC Equity Fund,,,,,,,,,False,SC6906,Equity,287.44,157.87,Offline,Transaction remark 107
+127,SWP,71454.72,2025-02-10,Pending,DEF Balanced Fund,,,,,,,,,False,SC7798,Cash,368.04,194.15,Online,Transaction remark 108
+80,SIP,15972.44,2024-12-03,Failed,ABC Equity Fund,,,Monthly,2024-12-03,2025-12-03,2025-01-02,1,25,True,SC8311,Equity,210.58,75.85,Offline,Transaction remark 109
+82,SIP,15472.02,2025-01-03,Completed,ABC Equity Fund,,,Yearly,2025-01-03,2026-01-03,2025-02-02,12,13,True,SC6003,Debt,104.17,148.53,Online,Transaction remark 110
+124,LUMPSUM,92538.89,2024-04-27,Completed,ABC Equity Fund,,,,,,,,,False,SC8167,Cash,1552.32,59.61,Offline,Transaction remark 111
+103,STP,35714.91,2024-10-25,Completed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2024-10-25,2025-10-25,2024-11-24,6,28,True,SC8056,Debt,524.27,68.12,Online,Transaction remark 112
+123,SWP,44410.21,2025-01-02,Pending,DEF Balanced Fund,,,,,,,,,False,SC3523,Debt,250.13,177.55,Offline,Transaction remark 113
+138,SWP,23392.3,2024-09-23,Completed,PQR Liquid Fund,,,,,,,,,False,SC7118,Equity,245.52,95.28,Online,Transaction remark 114
+132,LUMPSUM,29248.81,2024-11-05,Completed,ABC Equity Fund,,,,,,,,,False,SC9223,Debt,783.5,37.33,Offline,Transaction remark 115
+106,SIP,38156.97,2024-02-12,Pending,PQR Liquid Fund,,,Yearly,2024-02-12,2025-02-11,2024-03-13,1,12,True,SC9142,Debt,208.52,182.99,Offline,Transaction remark 116
+84,SWP,64871.58,2023-03-19,Pending,ABC Equity Fund,,,,,,,,,False,SC4194,Debt,342.21,189.57,Offline,Transaction remark 117
+112,LUMPSUM,56199.27,2024-05-14,Completed,XYZ Debt Fund,,,,,,,,,False,SC2721,Debt,2450.35,22.94,Online,Transaction remark 118
+102,LUMPSUM,11561.43,2024-10-06,Pending,PQR Liquid Fund,,,,,,,,,False,SC2992,Cash,61.44,188.17,Offline,Transaction remark 119
+126,STP,69781.99,2025-03-05,Failed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Quarterly,2025-03-05,2026-03-05,2025-04-04,5,25,True,SC7801,Debt,881.33,79.18,Online,Transaction remark 120
+137,LUMPSUM,52147.29,2023-09-27,Pending,ABC Equity Fund,,,,,,,,,False,SC3424,Cash,422.1,123.54,Online,Transaction remark 121
+86,SWP,65211.2,2025-01-09,Completed,DEF Balanced Fund,,,,,,,,,False,SC4351,Cash,664.79,98.09,Online,Transaction remark 122
+107,STP,89540.23,2024-04-12,Failed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Yearly,2024-04-12,2025-04-12,2024-05-12,3,19,True,SC3676,Equity,664.21,134.81,Online,Transaction remark 123
+98,SWP,95201.94,2023-02-06,Pending,XYZ Debt Fund,,,,,,,,,False,SC2725,Debt,882.5,107.88,Online,Transaction remark 124
+80,SIP,71539.85,2024-11-20,Pending,ABC Equity Fund,,,Yearly,2024-11-20,2025-11-20,2024-12-20,11,29,True,SC2776,Equity,622.95,114.84,Offline,Transaction remark 125
+90,STP,4807.92,2024-01-31,Failed,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Monthly,2024-01-31,2025-01-30,2024-03-01,12,25,True,SC5967,Cash,55.83,86.12,Online,Transaction remark 126
+106,LUMPSUM,41859.92,2023-04-08,Failed,XYZ Debt Fund,,,,,,,,,False,SC2986,Equity,224.41,186.53,Offline,Transaction remark 127
+116,STP,9798.19,2025-02-11,Pending,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Quarterly,2025-02-11,2026-02-11,2025-03-13,10,20,True,SC8967,Cash,176.06,55.65,Offline,Transaction remark 128
+131,SWP,98943.37,2023-01-31,Completed,ABC Equity Fund,,,,,,,,,False,SC7080,Debt,764.91,129.35,Offline,Transaction remark 129
+136,SWP,65504.22,2023-03-07,Failed,DEF Balanced Fund,,,,,,,,,False,SC8765,Debt,489.72,133.76,Offline,Transaction remark 130
+121,SIP,83091.91,2023-05-24,Completed,PQR Liquid Fund,,,Quarterly,2023-05-24,2024-05-23,2023-06-23,7,30,True,SC5675,Equity,2908.29,28.57,Online,Transaction remark 131
+94,SWP,84871.44,2023-05-31,Pending,ABC Equity Fund,,,,,,,,,False,SC4494,Debt,935.37,90.74,Offline,Transaction remark 132
+122,SIP,46872.19,2023-10-19,Completed,XYZ Debt Fund,,,Quarterly,2023-10-19,2024-10-18,2023-11-18,4,16,True,SC7231,Equity,983.44,47.66,Offline,Transaction remark 133
+112,SIP,26032.6,2023-10-28,Completed,PQR Liquid Fund,,,Yearly,2023-10-28,2024-10-27,2023-11-27,10,19,True,SC2071,Debt,331.46,78.54,Offline,Transaction remark 134
+136,SWP,81641.79,2024-05-25,Completed,ABC Equity Fund,,,,,,,,,False,SC7520,Equity,2266.2,36.03,Online,Transaction remark 135
+102,STP,86233.09,2023-08-10,Failed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2023-08-10,2024-08-09,2023-09-09,1,34,True,SC4117,Equity,551.39,156.39,Online,Transaction remark 136
+119,STP,91292.43,2025-05-02,Pending,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2025-05-02,2026-05-02,2025-06-01,4,32,True,SC3682,Equity,913.98,99.88,Offline,Transaction remark 137
+133,STP,53156.09,2023-07-21,Pending,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Quarterly,2023-07-21,2024-07-20,2023-08-20,10,29,True,SC5313,Equity,309.11,171.96,Offline,Transaction remark 138
+97,LUMPSUM,31979.69,2023-09-06,Failed,DEF Balanced Fund,,,,,,,,,False,SC8294,Equity,538.47,59.39,Online,Transaction remark 139
+105,SIP,89961.48,2023-03-31,Completed,XYZ Debt Fund,,,Monthly,2023-03-31,2024-03-30,2023-04-30,3,15,True,SC9827,Equity,1249.47,72.0,Offline,Transaction remark 140
+123,LUMPSUM,21323.36,2023-08-27,Completed,ABC Equity Fund,,,,,,,,,False,SC3409,Debt,125.62,169.74,Offline,Transaction remark 141
+109,SIP,31183.1,2025-04-29,Pending,ABC Equity Fund,,,Yearly,2025-04-29,2026-04-29,2025-05-29,8,13,True,SC2698,Equity,479.0,65.1,Online,Transaction remark 142
+120,STP,79958.37,2023-02-16,Failed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2023-02-16,2024-02-16,2023-03-18,8,17,True,SC6662,Equity,415.69,192.35,Online,Transaction remark 143
+103,LUMPSUM,53574.97,2023-03-06,Pending,XYZ Debt Fund,,,,,,,,,False,SC4195,Debt,704.37,76.06,Offline,Transaction remark 144
+96,STP,10426.09,2024-06-02,Completed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Quarterly,2024-06-02,2025-06-02,2024-07-02,6,13,True,SC2121,Debt,812.29,12.84,Offline,Transaction remark 145
+113,STP,95440.18,2024-08-03,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2024-08-03,2025-08-03,2024-09-02,2,26,True,SC1721,Debt,1249.47,76.38,Online,Transaction remark 146
+104,SWP,57265.06,2023-03-15,Failed,PQR Liquid Fund,,,,,,,,,False,SC4101,Debt,1558.18,36.75,Online,Transaction remark 147
+95,LUMPSUM,55914.0,2023-06-03,Pending,PQR Liquid Fund,,,,,,,,,False,SC3446,Equity,417.09,134.06,Offline,Transaction remark 148
+139,SWP,5044.03,2024-05-13,Completed,XYZ Debt Fund,,,,,,,,,False,SC4901,Cash,71.35,70.69,Online,Transaction remark 149
+127,SWP,18256.15,2023-11-27,Pending,DEF Balanced Fund,,,,,,,,,False,SC5141,Debt,372.48,49.01,Online,Transaction remark 150
+101,SIP,65082.69,2025-04-06,Completed,ABC Equity Fund,,,Yearly,2025-04-06,2026-04-06,2025-05-06,3,29,True,SC8834,Debt,373.83,174.1,Online,Transaction remark 151
+128,SIP,72421.81,2024-12-04,Completed,DEF Balanced Fund,,,Yearly,2024-12-04,2025-12-04,2025-01-03,9,13,True,SC6418,Debt,453.19,159.8,Online,Transaction remark 152
+101,SIP,30625.76,2024-08-16,Completed,PQR Liquid Fund,,,Monthly,2024-08-16,2025-08-16,2024-09-15,1,22,True,SC7455,Cash,211.03,145.13,Online,Transaction remark 153
+138,LUMPSUM,5577.99,2023-06-29,Completed,PQR Liquid Fund,,,,,,,,,False,SC9635,Debt,145.93,38.22,Online,Transaction remark 154
+109,SIP,97368.77,2023-12-20,Completed,DEF Balanced Fund,,,Yearly,2023-12-20,2024-12-19,2024-01-19,4,26,True,SC5904,Cash,2666.13,36.52,Online,Transaction remark 155
+139,SWP,15735.56,2024-02-03,Pending,XYZ Debt Fund,,,,,,,,,False,SC9459,Cash,85.22,184.65,Offline,Transaction remark 156
+81,SWP,47350.62,2024-11-13,Failed,PQR Liquid Fund,,,,,,,,,False,SC4841,Cash,522.18,90.68,Online,Transaction remark 157
+84,LUMPSUM,83242.52,2024-02-09,Failed,DEF Balanced Fund,,,,,,,,,False,SC3447,Debt,430.14,193.52,Online,Transaction remark 158
+94,SIP,76207.08,2023-03-14,Completed,ABC Equity Fund,,,Quarterly,2023-03-14,2024-03-13,2023-04-13,4,30,True,SC8286,Debt,437.07,174.36,Online,Transaction remark 159
+114,LUMPSUM,83433.62,2023-10-16,Completed,PQR Liquid Fund,,,,,,,,,False,SC7389,Debt,919.65,90.72,Online,Transaction remark 160
+137,SWP,93750.87,2023-01-25,Pending,DEF Balanced Fund,,,,,,,,,False,SC4754,Cash,1294.25,72.44,Online,Transaction remark 161
+116,LUMPSUM,72267.8,2024-05-24,Failed,XYZ Debt Fund,,,,,,,,,False,SC8003,Equity,664.35,108.78,Offline,Transaction remark 162
+108,LUMPSUM,14522.43,2024-08-18,Pending,DEF Balanced Fund,,,,,,,,,False,SC3101,Debt,194.25,74.76,Online,Transaction remark 163
+88,SWP,55923.98,2024-12-02,Pending,PQR Liquid Fund,,,,,,,,,False,SC8812,Equity,1378.44,40.57,Online,Transaction remark 164
+108,STP,15661.57,2025-01-20,Pending,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Quarterly,2025-01-20,2026-01-20,2025-02-19,10,20,True,SC2377,Debt,927.82,16.88,Online,Transaction remark 165
+81,SWP,75659.35,2024-10-10,Failed,DEF Balanced Fund,,,,,,,,,False,SC9773,Cash,892.4,84.78,Offline,Transaction remark 166
+111,LUMPSUM,56208.96,2024-03-06,Completed,DEF Balanced Fund,,,,,,,,,False,SC9759,Debt,473.98,118.59,Offline,Transaction remark 167
+105,LUMPSUM,67266.17,2025-03-07,Failed,ABC Equity Fund,,,,,,,,,False,SC3133,Cash,697.62,96.42,Online,Transaction remark 168
+130,LUMPSUM,41161.95,2023-04-24,Pending,ABC Equity Fund,,,,,,,,,False,SC6944,Debt,447.89,91.9,Offline,Transaction remark 169
+98,LUMPSUM,52783.81,2023-06-21,Completed,XYZ Debt Fund,,,,,,,,,False,SC1827,Cash,508.41,103.82,Offline,Transaction remark 170
+120,LUMPSUM,57160.37,2024-10-08,Pending,ABC Equity Fund,,,,,,,,,False,SC7369,Debt,499.47,114.44,Offline,Transaction remark 171
+136,SWP,43896.26,2023-05-08,Failed,XYZ Debt Fund,,,,,,,,,False,SC7301,Equity,219.91,199.61,Offline,Transaction remark 172
+95,SIP,72164.93,2024-05-16,Pending,PQR Liquid Fund,,,Monthly,2024-05-16,2025-05-16,2024-06-15,1,28,True,SC4069,Cash,797.41,90.5,Online,Transaction remark 173
+80,LUMPSUM,84495.56,2024-07-18,Failed,ABC Equity Fund,,,,,,,,,False,SC8459,Equity,470.41,179.62,Online,Transaction remark 174
+133,SIP,62147.46,2024-05-29,Failed,XYZ Debt Fund,,,Monthly,2024-05-29,2025-05-29,2024-06-28,9,21,True,SC1386,Debt,670.05,92.75,Offline,Transaction remark 175
+130,LUMPSUM,45812.17,2025-04-20,Completed,DEF Balanced Fund,,,,,,,,,False,SC2809,Equity,283.61,161.53,Offline,Transaction remark 176
+86,LUMPSUM,1062.98,2024-12-15,Failed,DEF Balanced Fund,,,,,,,,,False,SC1768,Debt,7.04,150.99,Online,Transaction remark 177
+97,STP,80336.08,2024-05-26,Failed,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Monthly,2024-05-26,2025-05-26,2024-06-25,7,28,True,SC9003,Debt,416.53,192.87,Online,Transaction remark 178
+123,SIP,60725.51,2024-07-24,Completed,DEF Balanced Fund,,,Quarterly,2024-07-24,2025-07-24,2024-08-23,8,23,True,SC1536,Debt,306.65,198.03,Offline,Transaction remark 179
+130,SIP,40456.33,2025-03-18,Failed,XYZ Debt Fund,,,Monthly,2025-03-18,2026-03-18,2025-04-17,3,12,True,SC1954,Debt,255.05,158.62,Online,Transaction remark 180
+95,LUMPSUM,48940.29,2025-03-06,Completed,DEF Balanced Fund,,,,,,,,,False,SC2627,Cash,599.91,81.58,Online,Transaction remark 181
+121,SWP,2781.28,2023-08-20,Failed,PQR Liquid Fund,,,,,,,,,False,SC3821,Equity,21.59,128.82,Offline,Transaction remark 182
+127,STP,42590.63,2023-02-08,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2023-02-08,2024-02-08,2023-03-10,6,26,True,SC4617,Equity,322.64,132.01,Offline,Transaction remark 183
+127,SIP,12572.13,2025-02-08,Pending,XYZ Debt Fund,,,Monthly,2025-02-08,2026-02-08,2025-03-10,12,13,True,SC7305,Debt,218.99,57.41,Online,Transaction remark 184
+131,SWP,52056.19,2024-01-02,Failed,XYZ Debt Fund,,,,,,,,,False,SC4195,Equity,285.82,182.13,Online,Transaction remark 185
+120,SIP,41231.02,2023-12-10,Pending,ABC Equity Fund,,,Quarterly,2023-12-10,2024-12-09,2024-01-09,6,17,True,SC3726,Cash,253.84,162.43,Offline,Transaction remark 186
+123,SIP,86039.52,2023-05-11,Failed,DEF Balanced Fund,,,Yearly,2023-05-11,2024-05-10,2023-06-10,8,34,True,SC3970,Debt,526.0,163.57,Offline,Transaction remark 187
+119,SWP,67903.48,2023-05-19,Failed,XYZ Debt Fund,,,,,,,,,False,SC7473,Debt,926.92,73.26,Online,Transaction remark 188
+80,SWP,88326.06,2023-08-20,Completed,DEF Balanced Fund,,,,,,,,,False,SC9824,Cash,2482.4,35.58,Online,Transaction remark 189
+90,SWP,48174.01,2023-02-26,Completed,DEF Balanced Fund,,,,,,,,,False,SC7208,Equity,260.26,185.1,Offline,Transaction remark 190
+82,LUMPSUM,83945.64,2023-01-01,Pending,XYZ Debt Fund,,,,,,,,,False,SC2617,Debt,1682.16,49.9,Online,Transaction remark 191
+88,STP,3180.57,2023-12-31,Completed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Quarterly,2023-12-31,2024-12-30,2024-01-30,7,17,True,SC7799,Cash,31.42,101.23,Offline,Transaction remark 192
+93,SIP,79802.27,2024-03-01,Pending,DEF Balanced Fund,,,Yearly,2024-03-01,2025-03-01,2024-03-31,5,31,True,SC9434,Cash,1083.86,73.63,Online,Transaction remark 193
+123,STP,67472.4,2023-03-25,Failed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Yearly,2023-03-25,2024-03-24,2023-04-24,4,23,True,SC8187,Cash,368.69,183.01,Offline,Transaction remark 194
+112,LUMPSUM,13431.21,2024-02-01,Completed,DEF Balanced Fund,,,,,,,,,False,SC5735,Debt,224.44,59.84,Online,Transaction remark 195
+132,SWP,64246.25,2024-03-28,Pending,XYZ Debt Fund,,,,,,,,,False,SC6805,Equity,340.57,188.64,Online,Transaction remark 196
+98,LUMPSUM,4794.18,2024-09-11,Failed,PQR Liquid Fund,,,,,,,,,False,SC6655,Cash,43.97,109.03,Online,Transaction remark 197
+94,STP,46658.91,2024-12-08,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2024-12-08,2025-12-08,2025-01-07,3,14,True,SC8368,Equity,926.27,50.37,Offline,Transaction remark 198
+128,STP,9462.11,2024-06-23,Failed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2024-06-23,2025-06-23,2024-07-23,6,27,True,SC8920,Equity,167.26,56.57,Offline,Transaction remark 199
+96,LUMPSUM,34618.4,2024-04-02,Completed,ABC Equity Fund,,,,,,,,,False,SC4747,Equity,741.69,46.68,Online,Transaction remark 200
+127,SWP,27005.44,2024-08-17,Failed,DEF Balanced Fund,,,,,,,,,False,SC1967,Equity,147.61,182.95,Offline,Transaction remark 201
+81,SIP,67252.0,2024-08-25,Completed,ABC Equity Fund,,,Monthly,2024-08-25,2025-08-25,2024-09-24,5,12,True,SC6022,Equity,390.42,172.26,Online,Transaction remark 202
+128,STP,63456.42,2023-01-16,Completed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Quarterly,2023-01-16,2024-01-16,2023-02-15,10,28,True,SC6034,Equity,374.48,169.45,Online,Transaction remark 203
+122,SWP,11961.16,2023-01-10,Pending,PQR Liquid Fund,,,,,,,,,False,SC2832,Cash,87.47,136.75,Online,Transaction remark 204
+133,SIP,74631.1,2023-12-21,Completed,ABC Equity Fund,,,Yearly,2023-12-21,2024-12-20,2024-01-20,7,27,True,SC8187,Equity,468.81,159.19,Online,Transaction remark 205
+118,STP,50266.61,2024-09-06,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Yearly,2024-09-06,2025-09-06,2024-10-06,5,30,True,SC9775,Cash,734.45,68.44,Online,Transaction remark 206
+123,SIP,80039.03,2023-02-27,Completed,PQR Liquid Fund,,,Quarterly,2023-02-27,2024-02-27,2023-03-29,11,16,True,SC7987,Cash,860.03,93.07,Offline,Transaction remark 207
+89,SIP,57196.15,2024-09-14,Failed,DEF Balanced Fund,,,Quarterly,2024-09-14,2025-09-14,2024-10-14,6,12,True,SC5462,Debt,442.12,129.37,Offline,Transaction remark 208
+118,SIP,99010.13,2025-05-05,Completed,DEF Balanced Fund,,,Quarterly,2025-05-05,2026-05-05,2025-06-04,2,31,True,SC7282,Equity,531.84,186.17,Offline,Transaction remark 209
+134,STP,75930.54,2023-01-17,Completed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Quarterly,2023-01-17,2024-01-17,2023-02-16,3,17,True,SC8002,Cash,396.65,191.43,Online,Transaction remark 210
+107,STP,76404.65,2024-09-09,Completed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Monthly,2024-09-09,2025-09-09,2024-10-09,9,17,True,SC4326,Equity,2331.39,32.77,Offline,Transaction remark 211
+133,LUMPSUM,45288.28,2023-03-19,Completed,ABC Equity Fund,,,,,,,,,False,SC1200,Cash,4202.01,10.78,Online,Transaction remark 212
+89,SIP,16841.0,2023-10-19,Completed,XYZ Debt Fund,,,Quarterly,2023-10-19,2024-10-18,2023-11-18,2,21,True,SC2447,Cash,156.77,107.42,Online,Transaction remark 213
+123,STP,68441.79,2024-02-23,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2024-02-23,2025-02-22,2024-03-24,12,14,True,SC7521,Cash,876.1,78.12,Online,Transaction remark 214
+125,SIP,53826.92,2023-09-10,Completed,XYZ Debt Fund,,,Monthly,2023-09-10,2024-09-09,2023-10-10,1,19,True,SC6455,Equity,361.07,149.08,Offline,Transaction remark 215
+140,SWP,21025.23,2023-03-11,Pending,DEF Balanced Fund,,,,,,,,,False,SC4312,Debt,163.34,128.72,Online,Transaction remark 216
+135,SIP,57836.36,2025-05-11,Completed,PQR Liquid Fund,,,Monthly,2025-05-11,2026-05-11,2025-06-10,10,34,True,SC2749,Cash,418.65,138.15,Online,Transaction remark 217
+124,LUMPSUM,59140.95,2025-04-07,Completed,PQR Liquid Fund,,,,,,,,,False,SC8078,Cash,580.72,101.84,Offline,Transaction remark 218
+128,SIP,21771.15,2024-05-01,Failed,PQR Liquid Fund,,,Yearly,2024-05-01,2025-05-01,2024-05-31,11,13,True,SC2612,Equity,184.42,118.05,Offline,Transaction remark 219
+125,LUMPSUM,78102.28,2024-08-09,Completed,DEF Balanced Fund,,,,,,,,,False,SC8674,Cash,909.95,85.83,Offline,Transaction remark 220
+132,LUMPSUM,2769.52,2025-02-25,Completed,PQR Liquid Fund,,,,,,,,,False,SC5183,Cash,40.85,67.8,Online,Transaction remark 221
+103,LUMPSUM,88060.55,2023-10-02,Completed,PQR Liquid Fund,,,,,,,,,False,SC3169,Cash,467.08,188.53,Offline,Transaction remark 222
+84,STP,19251.53,2023-07-03,Failed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Yearly,2023-07-03,2024-07-02,2023-08-02,10,30,True,SC6567,Equity,519.0,37.09,Online,Transaction remark 223
+121,STP,56294.78,2024-02-01,Pending,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Quarterly,2024-02-01,2025-01-31,2024-03-02,9,36,True,SC7099,Equity,1021.98,55.08,Offline,Transaction remark 224
+96,SWP,34807.71,2024-11-25,Pending,DEF Balanced Fund,,,,,,,,,False,SC7674,Debt,517.58,67.25,Online,Transaction remark 225
+90,STP,58655.92,2024-03-04,Pending,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Yearly,2024-03-04,2025-03-04,2024-04-03,10,22,True,SC5990,Equity,1048.82,55.93,Online,Transaction remark 226
+140,STP,6176.28,2023-02-18,Completed,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Quarterly,2023-02-18,2024-02-18,2023-03-20,3,31,True,SC1442,Cash,36.82,167.74,Online,Transaction remark 227
+132,SWP,36437.1,2024-06-09,Completed,ABC Equity Fund,,,,,,,,,False,SC1513,Cash,852.8,42.73,Offline,Transaction remark 228
+138,LUMPSUM,16403.35,2023-06-17,Pending,ABC Equity Fund,,,,,,,,,False,SC2838,Debt,162.98,100.65,Offline,Transaction remark 229
+112,STP,17829.97,2023-12-29,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Quarterly,2023-12-29,2024-12-28,2024-01-28,1,13,True,SC8064,Cash,126.34,141.13,Online,Transaction remark 230
+115,SWP,33739.37,2023-05-09,Completed,ABC Equity Fund,,,,,,,,,False,SC8915,Equity,300.52,112.27,Offline,Transaction remark 231
+136,SIP,57789.37,2023-08-30,Pending,XYZ Debt Fund,,,Quarterly,2023-08-30,2024-08-29,2023-09-29,10,16,True,SC1832,Equity,818.41,70.61,Online,Transaction remark 232
+121,STP,24756.37,2023-10-05,Completed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2023-10-05,2024-10-04,2023-11-04,2,33,True,SC8639,Cash,1853.22,13.36,Online,Transaction remark 233
+110,STP,53468.73,2023-02-15,Pending,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Monthly,2023-02-15,2024-02-15,2023-03-17,9,15,True,SC3079,Equity,466.11,114.71,Online,Transaction remark 234
+86,SWP,89394.5,2025-03-11,Completed,PQR Liquid Fund,,,,,,,,,False,SC6619,Equity,1021.33,87.53,Online,Transaction remark 235
+91,STP,33498.58,2023-09-13,Failed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Monthly,2023-09-13,2024-09-12,2023-10-13,9,13,True,SC9814,Cash,662.89,50.53,Offline,Transaction remark 236
+99,SWP,47271.65,2024-12-24,Failed,ABC Equity Fund,,,,,,,,,False,SC3967,Cash,2842.72,16.63,Offline,Transaction remark 237
+139,LUMPSUM,5814.13,2023-12-29,Failed,XYZ Debt Fund,,,,,,,,,False,SC6156,Debt,288.08,20.18,Offline,Transaction remark 238
+140,STP,47478.23,2023-11-24,Completed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Quarterly,2023-11-24,2024-11-23,2023-12-24,7,16,True,SC2039,Cash,534.96,88.75,Online,Transaction remark 239
+109,SWP,18486.87,2023-06-13,Pending,XYZ Debt Fund,,,,,,,,,False,SC7146,Cash,292.24,63.26,Online,Transaction remark 240
+98,STP,31212.86,2025-01-11,Pending,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2025-01-11,2026-01-11,2025-02-10,8,32,True,SC3176,Cash,161.83,192.87,Offline,Transaction remark 241
+136,LUMPSUM,6543.27,2023-02-09,Failed,DEF Balanced Fund,,,,,,,,,False,SC6268,Equity,37.83,172.97,Online,Transaction remark 242
+94,STP,91141.66,2024-06-17,Pending,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Monthly,2024-06-17,2025-06-17,2024-07-17,12,12,True,SC4354,Equity,847.39,107.56,Online,Transaction remark 243
+103,SIP,35181.97,2023-07-20,Pending,XYZ Debt Fund,,,Quarterly,2023-07-20,2024-07-19,2023-08-19,1,14,True,SC8793,Cash,979.32,35.92,Online,Transaction remark 244
+113,SWP,82006.42,2023-05-29,Pending,DEF Balanced Fund,,,,,,,,,False,SC5323,Cash,463.74,176.84,Online,Transaction remark 245
+111,SIP,86936.95,2023-12-27,Failed,DEF Balanced Fund,,,Yearly,2023-12-27,2024-12-26,2024-01-26,10,22,True,SC5039,Equity,2864.02,30.35,Online,Transaction remark 246
+113,SIP,6869.05,2023-11-16,Pending,DEF Balanced Fund,,,Quarterly,2023-11-16,2024-11-15,2023-12-16,2,31,True,SC7099,Cash,127.89,53.71,Online,Transaction remark 247
+83,LUMPSUM,96055.98,2024-08-11,Completed,PQR Liquid Fund,,,,,,,,,False,SC1333,Debt,548.64,175.08,Offline,Transaction remark 248
+94,SIP,66008.77,2024-01-04,Failed,ABC Equity Fund,,,Yearly,2024-01-04,2025-01-03,2024-02-03,1,30,True,SC7474,Debt,385.92,171.04,Offline,Transaction remark 249
+125,STP,52116.66,2023-02-09,Failed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Monthly,2023-02-09,2024-02-09,2023-03-11,3,23,True,SC5517,Cash,571.67,91.17,Offline,Transaction remark 250
+87,STP,11516.39,2025-04-27,Failed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2025-04-27,2026-04-27,2025-05-27,6,18,True,SC5693,Debt,64.26,179.22,Offline,Transaction remark 251
+116,STP,63194.61,2023-02-16,Pending,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Monthly,2023-02-16,2024-02-16,2023-03-18,4,15,True,SC7642,Debt,462.43,136.66,Online,Transaction remark 252
+106,SWP,48742.29,2025-05-17,Failed,DEF Balanced Fund,,,,,,,,,False,SC6334,Debt,252.47,193.06,Online,Transaction remark 253
+86,STP,45949.86,2023-08-23,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2023-08-23,2024-08-22,2023-09-22,11,35,True,SC4676,Cash,1482.59,30.99,Online,Transaction remark 254
+110,STP,41291.56,2023-04-01,Completed,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Monthly,2023-04-01,2024-03-31,2023-05-01,1,13,True,SC2308,Debt,2813.99,14.67,Online,Transaction remark 255
+94,STP,37657.35,2023-09-15,Failed,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Monthly,2023-09-15,2024-09-14,2023-10-15,2,23,True,SC3880,Cash,351.75,107.06,Online,Transaction remark 256
+99,SIP,61962.33,2023-09-27,Failed,DEF Balanced Fund,,,Quarterly,2023-09-27,2024-09-26,2023-10-27,2,24,True,SC3720,Debt,371.19,166.93,Online,Transaction remark 257
+85,SIP,56291.6,2024-03-05,Failed,XYZ Debt Fund,,,Quarterly,2024-03-05,2025-03-05,2024-04-04,2,15,True,SC2826,Cash,4227.85,13.31,Offline,Transaction remark 258
+116,SIP,23880.12,2023-12-14,Pending,ABC Equity Fund,,,Yearly,2023-12-14,2024-12-13,2024-01-13,12,24,True,SC7484,Cash,250.1,95.48,Online,Transaction remark 259
+111,SWP,63557.1,2023-07-28,Completed,DEF Balanced Fund,,,,,,,,,False,SC6987,Cash,340.46,186.68,Online,Transaction remark 260
+120,STP,59164.26,2024-04-25,Pending,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2024-04-25,2025-04-25,2024-05-25,8,29,True,SC1563,Equity,319.97,184.91,Offline,Transaction remark 261
+87,LUMPSUM,77793.31,2024-11-09,Pending,PQR Liquid Fund,,,,,,,,,False,SC3890,Debt,661.79,117.55,Offline,Transaction remark 262
+122,SWP,83540.8,2023-11-15,Failed,DEF Balanced Fund,,,,,,,,,False,SC3111,Equity,3659.83,22.83,Offline,Transaction remark 263
+112,STP,94426.39,2023-03-06,Failed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Quarterly,2023-03-06,2024-03-05,2023-04-05,9,25,True,SC1442,Cash,858.96,109.93,Online,Transaction remark 264
+124,SIP,72820.22,2023-02-13,Completed,XYZ Debt Fund,,,Quarterly,2023-02-13,2024-02-13,2023-03-15,6,15,True,SC4759,Cash,649.53,112.11,Offline,Transaction remark 265
+109,SIP,1363.89,2023-01-04,Failed,PQR Liquid Fund,,,Quarterly,2023-01-04,2024-01-04,2023-02-03,11,34,True,SC9838,Equity,7.77,175.53,Offline,Transaction remark 266
+82,STP,99905.96,2024-07-27,Pending,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2024-07-27,2025-07-27,2024-08-26,2,35,True,SC1176,Equity,584.58,170.9,Online,Transaction remark 267
+131,SWP,11796.78,2023-02-06,Failed,PQR Liquid Fund,,,,,,,,,False,SC5904,Equity,189.65,62.2,Offline,Transaction remark 268
+108,LUMPSUM,57318.06,2025-04-15,Pending,ABC Equity Fund,,,,,,,,,False,SC6733,Debt,847.36,67.64,Offline,Transaction remark 269
+90,STP,13186.72,2024-03-01,Pending,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Yearly,2024-03-01,2025-03-01,2024-03-31,5,28,True,SC7793,Cash,183.44,71.89,Online,Transaction remark 270
+103,LUMPSUM,32684.23,2023-10-09,Completed,DEF Balanced Fund,,,,,,,,,False,SC8178,Equity,1047.94,31.19,Offline,Transaction remark 271
+112,SWP,33576.47,2024-01-16,Completed,PQR Liquid Fund,,,,,,,,,False,SC7782,Debt,338.07,99.32,Offline,Transaction remark 272
+113,STP,80235.04,2023-02-06,Failed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Yearly,2023-02-06,2024-02-06,2023-03-08,7,27,True,SC5528,Equity,604.2,132.8,Offline,Transaction remark 273
+89,STP,67356.39,2024-11-05,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Yearly,2024-11-05,2025-11-05,2024-12-05,2,13,True,SC9642,Equity,1222.99,55.08,Offline,Transaction remark 274
+126,LUMPSUM,67107.44,2023-04-05,Pending,ABC Equity Fund,,,,,,,,,False,SC5170,Debt,1058.36,63.41,Online,Transaction remark 275
+118,STP,56896.0,2024-05-01,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2024-05-01,2025-05-01,2024-05-31,7,29,True,SC5690,Debt,590.74,96.31,Online,Transaction remark 276
+104,LUMPSUM,14390.7,2024-09-07,Failed,ABC Equity Fund,,,,,,,,,False,SC8649,Debt,152.66,94.27,Online,Transaction remark 277
+94,STP,52387.83,2023-11-03,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Yearly,2023-11-03,2024-11-02,2023-12-03,3,17,True,SC2256,Equity,363.89,143.97,Online,Transaction remark 278
+114,SIP,40314.52,2024-02-18,Failed,XYZ Debt Fund,,,Monthly,2024-02-18,2025-02-17,2024-03-19,11,23,True,SC9914,Cash,565.1,71.34,Online,Transaction remark 279
+104,SIP,62479.54,2024-08-22,Pending,ABC Equity Fund,,,Yearly,2024-08-22,2025-08-22,2024-09-21,2,17,True,SC6578,Equity,532.27,117.38,Online,Transaction remark 280
+115,STP,11769.54,2024-12-11,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Quarterly,2024-12-11,2025-12-11,2025-01-10,6,21,True,SC3378,Equity,214.4,54.9,Online,Transaction remark 281
+84,SIP,84725.14,2024-10-01,Pending,XYZ Debt Fund,,,Yearly,2024-10-01,2025-10-01,2024-10-31,10,32,True,SC2942,Debt,2951.79,28.7,Online,Transaction remark 282
+108,SIP,32530.6,2024-05-01,Completed,XYZ Debt Fund,,,Monthly,2024-05-01,2025-05-01,2024-05-31,2,27,True,SC3377,Debt,396.8,81.98,Online,Transaction remark 283
+140,SWP,3778.16,2023-08-09,Completed,XYZ Debt Fund,,,,,,,,,False,SC4331,Equity,21.14,178.72,Online,Transaction remark 284
+133,STP,80895.12,2024-12-30,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Monthly,2024-12-30,2025-12-30,2025-01-29,9,33,True,SC4692,Equity,419.19,192.98,Offline,Transaction remark 285
+84,SIP,33451.26,2025-03-25,Pending,XYZ Debt Fund,,,Yearly,2025-03-25,2026-03-25,2025-04-24,9,18,True,SC8015,Equity,191.65,174.54,Online,Transaction remark 286
+140,SWP,27504.16,2023-08-02,Completed,XYZ Debt Fund,,,,,,,,,False,SC1017,Debt,257.22,106.93,Offline,Transaction remark 287
+123,SWP,57636.72,2024-10-17,Failed,DEF Balanced Fund,,,,,,,,,False,SC6291,Cash,1616.34,35.66,Online,Transaction remark 288
+90,SIP,54436.68,2023-04-21,Pending,DEF Balanced Fund,,,Quarterly,2023-04-21,2024-04-20,2023-05-21,8,31,True,SC2670,Equity,468.71,116.14,Offline,Transaction remark 289
+119,SWP,43827.11,2025-01-18,Pending,DEF Balanced Fund,,,,,,,,,False,SC3758,Equity,463.95,94.47,Online,Transaction remark 290
+110,SIP,25903.6,2024-05-25,Completed,DEF Balanced Fund,,,Quarterly,2024-05-25,2025-05-25,2024-06-24,8,20,True,SC1122,Debt,133.22,194.44,Online,Transaction remark 291
+121,SWP,70971.15,2025-02-21,Pending,PQR Liquid Fund,,,,,,,,,False,SC2624,Debt,405.86,174.87,Offline,Transaction remark 292
+93,SIP,63398.75,2024-07-21,Failed,PQR Liquid Fund,,,Quarterly,2024-07-21,2025-07-21,2024-08-20,5,30,True,SC3015,Cash,350.55,180.86,Online,Transaction remark 293
+128,STP,74414.91,2023-01-23,Completed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Yearly,2023-01-23,2024-01-23,2023-02-22,1,36,True,SC9402,Equity,777.21,95.75,Online,Transaction remark 294
+112,SWP,24057.35,2023-05-28,Completed,DEF Balanced Fund,,,,,,,,,False,SC1867,Debt,204.59,117.59,Offline,Transaction remark 295
+126,LUMPSUM,77748.13,2023-02-02,Completed,ABC Equity Fund,,,,,,,,,False,SC4112,Cash,854.91,90.94,Online,Transaction remark 296
+131,SWP,60661.76,2023-09-09,Pending,XYZ Debt Fund,,,,,,,,,False,SC6972,Debt,442.84,136.98,Offline,Transaction remark 297
+140,STP,52443.99,2024-03-06,Completed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Monthly,2024-03-06,2025-03-06,2024-04-05,2,29,True,SC4752,Debt,2853.93,18.38,Offline,Transaction remark 298
+94,STP,38477.93,2023-05-26,Pending,DEF Balanced Fund,DEF Balanced Fund,PQR Liquid Fund,Quarterly,2023-05-26,2024-05-25,2023-06-25,2,29,True,SC8689,Cash,225.85,170.37,Online,Transaction remark 299
+135,STP,25884.79,2024-11-09,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Yearly,2024-11-09,2025-11-09,2024-12-09,1,16,True,SC7740,Cash,328.33,78.84,Online,Transaction remark 300
+127,SWP,44243.18,2024-08-15,Completed,ABC Equity Fund,,,,,,,,,False,SC5521,Cash,240.25,184.15,Online,Transaction remark 301
+86,SIP,33689.89,2023-06-25,Pending,ABC Equity Fund,,,Monthly,2023-06-25,2024-06-24,2023-07-25,3,20,True,SC8656,Cash,501.38,67.19,Online,Transaction remark 302
+116,STP,30228.25,2024-12-28,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Yearly,2024-12-28,2025-12-28,2025-01-27,3,32,True,SC9589,Cash,309.2,97.76,Online,Transaction remark 303
+121,SWP,49560.49,2024-06-17,Pending,XYZ Debt Fund,,,,,,,,,False,SC2188,Equity,373.25,132.78,Offline,Transaction remark 304
+136,LUMPSUM,61710.87,2024-11-01,Failed,DEF Balanced Fund,,,,,,,,,False,SC5949,Debt,1541.55,40.03,Offline,Transaction remark 305
+96,LUMPSUM,32305.52,2024-05-13,Pending,PQR Liquid Fund,,,,,,,,,False,SC5610,Equity,175.47,184.11,Offline,Transaction remark 306
+99,LUMPSUM,81207.33,2024-08-30,Completed,XYZ Debt Fund,,,,,,,,,False,SC2041,Cash,644.21,126.06,Online,Transaction remark 307
+129,STP,69763.89,2024-09-02,Pending,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Quarterly,2024-09-02,2025-09-02,2024-10-02,3,26,True,SC9218,Equity,779.68,89.48,Offline,Transaction remark 308
+118,SWP,75790.52,2024-03-29,Completed,XYZ Debt Fund,,,,,,,,,False,SC4088,Equity,1564.67,48.44,Offline,Transaction remark 309
+139,LUMPSUM,54443.29,2024-05-07,Completed,PQR Liquid Fund,,,,,,,,,False,SC4977,Debt,598.19,91.01,Offline,Transaction remark 310
+120,LUMPSUM,13002.35,2025-01-21,Pending,ABC Equity Fund,,,,,,,,,False,SC3586,Equity,95.62,135.98,Online,Transaction remark 311
+112,SIP,52026.81,2024-09-05,Completed,PQR Liquid Fund,,,Quarterly,2024-09-05,2025-09-05,2024-10-05,6,12,True,SC7067,Cash,349.68,148.78,Offline,Transaction remark 312
+92,SWP,81594.94,2023-07-01,Failed,ABC Equity Fund,,,,,,,,,False,SC1628,Debt,412.98,197.58,Online,Transaction remark 313
+115,SIP,73109.19,2023-10-21,Completed,XYZ Debt Fund,,,Quarterly,2023-10-21,2024-10-20,2023-11-20,10,30,True,SC8686,Debt,3790.51,19.29,Offline,Transaction remark 314
+116,STP,94131.8,2023-08-28,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2023-08-28,2024-08-27,2023-09-27,7,25,True,SC7356,Cash,1131.07,83.22,Offline,Transaction remark 315
+92,LUMPSUM,27088.61,2023-04-18,Pending,PQR Liquid Fund,,,,,,,,,False,SC4550,Equity,222.63,121.68,Offline,Transaction remark 316
+82,LUMPSUM,95081.03,2025-02-01,Completed,DEF Balanced Fund,,,,,,,,,False,SC3950,Debt,1379.4,68.93,Online,Transaction remark 317
+131,SWP,35198.23,2024-07-07,Pending,PQR Liquid Fund,,,,,,,,,False,SC2621,Equity,201.65,174.55,Online,Transaction remark 318
+123,SIP,56096.25,2023-12-22,Completed,PQR Liquid Fund,,,Yearly,2023-12-22,2024-12-21,2024-01-21,11,34,True,SC8062,Debt,1872.86,29.95,Offline,Transaction remark 319
+116,LUMPSUM,12769.44,2023-12-02,Pending,DEF Balanced Fund,,,,,,,,,False,SC3071,Cash,408.29,31.28,Online,Transaction remark 320
+98,SWP,66908.41,2024-04-27,Pending,ABC Equity Fund,,,,,,,,,False,SC8764,Cash,4850.16,13.8,Offline,Transaction remark 321
+98,SIP,86741.74,2024-10-10,Failed,PQR Liquid Fund,,,Monthly,2024-10-10,2025-10-10,2024-11-09,11,25,True,SC6523,Debt,714.04,121.48,Online,Transaction remark 322
+135,STP,62385.37,2023-01-07,Failed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Yearly,2023-01-07,2024-01-07,2023-02-06,10,16,True,SC5798,Equity,3353.63,18.6,Online,Transaction remark 323
+139,SWP,18443.31,2023-09-30,Completed,PQR Liquid Fund,,,,,,,,,False,SC8015,Equity,102.61,179.74,Online,Transaction remark 324
+103,SIP,18765.05,2024-01-20,Pending,PQR Liquid Fund,,,Yearly,2024-01-20,2025-01-19,2024-02-19,7,25,True,SC5579,Debt,115.05,163.1,Offline,Transaction remark 325
+94,SIP,26651.27,2024-01-26,Pending,ABC Equity Fund,,,Yearly,2024-01-26,2025-01-25,2024-02-25,3,26,True,SC4786,Equity,273.92,97.3,Offline,Transaction remark 326
+90,LUMPSUM,73986.96,2023-07-06,Failed,ABC Equity Fund,,,,,,,,,False,SC6684,Equity,524.96,140.94,Online,Transaction remark 327
+132,STP,21171.4,2024-05-02,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2024-05-02,2025-05-02,2024-06-01,11,13,True,SC3861,Debt,1987.64,10.65,Offline,Transaction remark 328
+140,SWP,56415.14,2023-10-09,Pending,PQR Liquid Fund,,,,,,,,,False,SC3358,Cash,511.32,110.33,Offline,Transaction remark 329
+123,LUMPSUM,38313.8,2024-10-20,Pending,XYZ Debt Fund,,,,,,,,,False,SC7894,Equity,999.09,38.35,Offline,Transaction remark 330
+106,SWP,73202.88,2023-08-11,Completed,ABC Equity Fund,,,,,,,,,False,SC7677,Equity,385.3,189.99,Online,Transaction remark 331
+82,STP,40804.68,2025-04-27,Failed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2025-04-27,2026-04-27,2025-05-27,9,29,True,SC8561,Cash,1713.93,23.81,Offline,Transaction remark 332
+128,LUMPSUM,65226.02,2024-06-14,Failed,XYZ Debt Fund,,,,,,,,,False,SC6993,Cash,399.09,163.44,Online,Transaction remark 333
+89,SIP,72636.95,2024-03-20,Failed,XYZ Debt Fund,,,Quarterly,2024-03-20,2025-03-20,2024-04-19,12,31,True,SC1148,Equity,1139.37,63.75,Online,Transaction remark 334
+121,LUMPSUM,53014.0,2023-03-26,Pending,XYZ Debt Fund,,,,,,,,,False,SC2257,Debt,376.86,140.67,Offline,Transaction remark 335
+119,STP,78940.13,2024-09-21,Failed,DEF Balanced Fund,DEF Balanced Fund,XYZ Debt Fund,Monthly,2024-09-21,2025-09-21,2024-10-21,2,34,True,SC1009,Debt,1571.12,50.24,Offline,Transaction remark 336
+136,SIP,85836.17,2025-02-01,Pending,PQR Liquid Fund,,,Quarterly,2025-02-01,2026-02-01,2025-03-03,1,25,True,SC8968,Debt,692.38,123.97,Offline,Transaction remark 337
+121,SWP,5777.27,2025-02-24,Failed,PQR Liquid Fund,,,,,,,,,False,SC9429,Debt,29.25,197.51,Offline,Transaction remark 338
+101,STP,16100.05,2024-03-31,Pending,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Quarterly,2024-03-31,2025-03-31,2024-04-30,8,21,True,SC1526,Equity,87.8,183.37,Offline,Transaction remark 339
+116,SWP,48056.74,2025-02-18,Completed,DEF Balanced Fund,,,,,,,,,False,SC1398,Debt,255.57,188.04,Online,Transaction remark 340
+97,LUMPSUM,31606.02,2023-08-05,Failed,XYZ Debt Fund,,,,,,,,,False,SC8812,Cash,293.8,107.58,Offline,Transaction remark 341
+102,STP,51299.88,2024-10-26,Completed,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Yearly,2024-10-26,2025-10-26,2024-11-25,2,16,True,SC3373,Equity,942.57,54.43,Offline,Transaction remark 342
+137,SWP,78760.35,2023-08-30,Completed,PQR Liquid Fund,,,,,,,,,False,SC2487,Cash,459.62,171.36,Online,Transaction remark 343
+113,LUMPSUM,27742.82,2025-01-09,Completed,XYZ Debt Fund,,,,,,,,,False,SC3148,Debt,219.63,126.32,Offline,Transaction remark 344
+132,SWP,56387.63,2024-03-08,Failed,DEF Balanced Fund,,,,,,,,,False,SC8566,Cash,1575.1,35.8,Online,Transaction remark 345
+120,SWP,32142.01,2024-09-14,Completed,XYZ Debt Fund,,,,,,,,,False,SC9407,Debt,841.14,38.21,Offline,Transaction remark 346
+119,SWP,8950.09,2025-02-23,Completed,DEF Balanced Fund,,,,,,,,,False,SC7425,Debt,213.98,41.83,Online,Transaction remark 347
+138,SIP,40212.65,2024-02-19,Completed,XYZ Debt Fund,,,Monthly,2024-02-19,2025-02-18,2024-03-20,5,20,True,SC7911,Equity,625.02,64.34,Offline,Transaction remark 348
+128,SIP,71387.35,2024-11-03,Completed,PQR Liquid Fund,,,Yearly,2024-11-03,2025-11-03,2024-12-03,6,19,True,SC8855,Equity,1778.54,40.14,Online,Transaction remark 349
+116,SWP,69957.3,2023-03-06,Completed,DEF Balanced Fund,,,,,,,,,False,SC8632,Cash,579.88,120.64,Offline,Transaction remark 350
+127,LUMPSUM,60021.9,2023-11-09,Pending,XYZ Debt Fund,,,,,,,,,False,SC8716,Cash,540.37,111.08,Online,Transaction remark 351
+133,SIP,94039.98,2024-08-11,Failed,ABC Equity Fund,,,Quarterly,2024-08-11,2025-08-11,2024-09-10,10,32,True,SC2823,Debt,1380.26,68.13,Online,Transaction remark 352
+109,STP,43561.42,2023-05-16,Pending,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2023-05-16,2024-05-15,2023-06-15,7,17,True,SC2717,Debt,428.39,101.69,Online,Transaction remark 353
+132,SWP,60069.84,2023-01-25,Failed,PQR Liquid Fund,,,,,,,,,False,SC8157,Equity,666.22,90.17,Offline,Transaction remark 354
+117,SWP,98068.21,2023-04-03,Failed,XYZ Debt Fund,,,,,,,,,False,SC6404,Cash,637.0,153.95,Offline,Transaction remark 355
+109,LUMPSUM,62442.74,2024-09-23,Completed,ABC Equity Fund,,,,,,,,,False,SC2915,Cash,331.73,188.23,Online,Transaction remark 356
+124,SWP,93317.84,2024-05-27,Completed,ABC Equity Fund,,,,,,,,,False,SC9931,Cash,2895.11,32.23,Offline,Transaction remark 357
+116,LUMPSUM,57520.19,2023-11-23,Failed,PQR Liquid Fund,,,,,,,,,False,SC8191,Equity,756.79,76.01,Online,Transaction remark 358
+105,SWP,93609.87,2023-04-05,Failed,DEF Balanced Fund,,,,,,,,,False,SC8603,Cash,2534.92,36.93,Online,Transaction remark 359
+112,LUMPSUM,25274.86,2024-06-10,Failed,ABC Equity Fund,,,,,,,,,False,SC6331,Debt,347.26,72.78,Offline,Transaction remark 360
+90,LUMPSUM,53504.96,2023-07-29,Failed,ABC Equity Fund,,,,,,,,,False,SC2356,Debt,452.35,118.28,Online,Transaction remark 361
+86,STP,36515.63,2025-01-24,Failed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Monthly,2025-01-24,2026-01-24,2025-02-23,10,16,True,SC3489,Debt,596.06,61.26,Online,Transaction remark 362
+97,LUMPSUM,42068.83,2025-03-08,Failed,PQR Liquid Fund,,,,,,,,,False,SC5756,Equity,669.88,62.8,Offline,Transaction remark 363
+122,LUMPSUM,53157.61,2025-04-26,Completed,PQR Liquid Fund,,,,,,,,,False,SC8692,Cash,936.33,56.77,Offline,Transaction remark 364
+127,SWP,88244.82,2023-12-26,Completed,PQR Liquid Fund,,,,,,,,,False,SC6007,Equity,999.91,88.25,Offline,Transaction remark 365
+114,SWP,63092.57,2023-05-21,Failed,ABC Equity Fund,,,,,,,,,False,SC3102,Cash,568.85,110.91,Online,Transaction remark 366
+90,STP,61735.46,2024-05-03,Pending,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2024-05-03,2025-05-03,2024-06-02,12,35,True,SC7502,Cash,581.84,106.1,Online,Transaction remark 367
+121,SWP,35230.07,2025-01-15,Pending,XYZ Debt Fund,,,,,,,,,False,SC9456,Equity,264.74,133.07,Online,Transaction remark 368
+87,STP,14326.37,2023-02-16,Failed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Yearly,2023-02-16,2024-02-16,2023-03-18,9,36,True,SC7834,Debt,99.04,144.65,Offline,Transaction remark 369
+80,LUMPSUM,62402.29,2023-07-31,Pending,PQR Liquid Fund,,,,,,,,,False,SC3624,Equity,340.37,183.34,Online,Transaction remark 370
+85,SWP,56300.75,2023-01-02,Completed,PQR Liquid Fund,,,,,,,,,False,SC5584,Equity,2382.28,23.63,Offline,Transaction remark 371
+99,SWP,21529.98,2024-03-30,Pending,DEF Balanced Fund,,,,,,,,,False,SC4287,Cash,268.88,80.07,Online,Transaction remark 372
+129,LUMPSUM,38886.77,2023-10-06,Failed,ABC Equity Fund,,,,,,,,,False,SC7598,Cash,363.55,106.96,Online,Transaction remark 373
+126,STP,32390.86,2025-04-08,Pending,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Yearly,2025-04-08,2026-04-08,2025-05-08,7,26,True,SC5092,Equity,290.95,111.33,Offline,Transaction remark 374
+80,STP,45294.68,2025-04-02,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Monthly,2025-04-02,2026-04-02,2025-05-02,4,24,True,SC7944,Equity,1254.96,36.09,Offline,Transaction remark 375
+82,STP,34173.8,2024-05-01,Completed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Yearly,2024-05-01,2025-05-01,2024-05-31,6,31,True,SC2202,Equity,175.87,194.31,Offline,Transaction remark 376
+140,STP,50840.03,2023-11-14,Failed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Monthly,2023-11-14,2024-11-13,2023-12-14,6,16,True,SC5384,Cash,1999.21,25.43,Online,Transaction remark 377
+128,SIP,45722.89,2024-11-10,Pending,ABC Equity Fund,,,Yearly,2024-11-10,2025-11-10,2024-12-10,1,27,True,SC7603,Cash,502.78,90.94,Offline,Transaction remark 378
+96,SIP,17441.66,2025-03-09,Pending,DEF Balanced Fund,,,Yearly,2025-03-09,2026-03-09,2025-04-08,12,17,True,SC2790,Cash,117.35,148.63,Offline,Transaction remark 379
+86,LUMPSUM,69726.87,2025-03-03,Completed,XYZ Debt Fund,,,,,,,,,False,SC2755,Equity,1849.42,37.7,Online,Transaction remark 380
+112,LUMPSUM,83903.85,2023-09-08,Failed,XYZ Debt Fund,,,,,,,,,False,SC5152,Equity,1096.39,76.53,Online,Transaction remark 381
+107,LUMPSUM,89348.71,2023-05-15,Completed,XYZ Debt Fund,,,,,,,,,False,SC3481,Debt,1053.19,84.84,Online,Transaction remark 382
+125,LUMPSUM,29631.22,2024-03-02,Completed,PQR Liquid Fund,,,,,,,,,False,SC1335,Cash,2359.61,12.56,Offline,Transaction remark 383
+137,STP,42707.7,2025-03-13,Failed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Quarterly,2025-03-13,2026-03-13,2025-04-12,9,13,True,SC2258,Debt,216.36,197.39,Offline,Transaction remark 384
+114,LUMPSUM,99598.89,2023-07-19,Pending,PQR Liquid Fund,,,,,,,,,False,SC1773,Cash,1147.3,86.81,Online,Transaction remark 385
+111,SIP,85755.2,2023-09-04,Pending,DEF Balanced Fund,,,Monthly,2023-09-04,2024-09-03,2023-10-04,6,21,True,SC6556,Equity,465.16,184.36,Online,Transaction remark 386
+80,SWP,48207.63,2024-09-11,Completed,XYZ Debt Fund,,,,,,,,,False,SC5564,Cash,272.31,177.03,Online,Transaction remark 387
+95,SWP,27980.75,2023-11-09,Completed,ABC Equity Fund,,,,,,,,,False,SC5801,Debt,179.76,155.66,Online,Transaction remark 388
+116,SIP,76238.08,2023-11-29,Failed,XYZ Debt Fund,,,Yearly,2023-11-29,2024-11-28,2023-12-29,3,33,True,SC1157,Equity,388.19,196.39,Offline,Transaction remark 389
+85,STP,81009.06,2024-11-16,Failed,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Monthly,2024-11-16,2025-11-16,2024-12-16,6,13,True,SC4499,Cash,530.08,152.82,Online,Transaction remark 390
+122,SIP,25485.67,2025-04-27,Failed,PQR Liquid Fund,,,Quarterly,2025-04-27,2026-04-27,2025-05-27,6,27,True,SC9143,Equity,314.36,81.07,Online,Transaction remark 391
+111,LUMPSUM,26949.08,2024-08-15,Pending,PQR Liquid Fund,,,,,,,,,False,SC3587,Equity,255.29,105.56,Online,Transaction remark 392
+91,LUMPSUM,96882.91,2024-08-24,Completed,XYZ Debt Fund,,,,,,,,,False,SC7171,Equity,1007.72,96.14,Online,Transaction remark 393
+85,STP,59228.51,2025-05-06,Completed,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Yearly,2025-05-06,2026-05-06,2025-06-05,3,19,True,SC2951,Debt,2351.96,25.18,Offline,Transaction remark 394
+109,SIP,17075.5,2025-04-12,Pending,ABC Equity Fund,,,Quarterly,2025-04-12,2026-04-12,2025-05-12,1,31,True,SC6825,Equity,125.49,136.07,Online,Transaction remark 395
+103,SIP,89045.12,2024-06-20,Completed,DEF Balanced Fund,,,Quarterly,2024-06-20,2025-06-20,2024-07-20,2,33,True,SC6183,Debt,498.69,178.56,Online,Transaction remark 396
+118,SIP,66328.93,2024-01-27,Pending,ABC Equity Fund,,,Quarterly,2024-01-27,2025-01-26,2024-02-26,2,29,True,SC4619,Cash,689.73,96.17,Online,Transaction remark 397
+98,STP,42378.09,2023-03-17,Pending,PQR Liquid Fund,PQR Liquid Fund,ABC Equity Fund,Monthly,2023-03-17,2024-03-16,2023-04-16,6,18,True,SC4351,Debt,327.89,129.24,Offline,Transaction remark 398
+133,SWP,34288.82,2023-02-25,Pending,XYZ Debt Fund,,,,,,,,,False,SC1222,Cash,445.54,76.96,Offline,Transaction remark 399
+139,LUMPSUM,71469.16,2024-07-10,Failed,ABC Equity Fund,,,,,,,,,False,SC5471,Equity,862.0,82.91,Online,Transaction remark 400
+114,SWP,87298.12,2025-03-28,Completed,DEF Balanced Fund,,,,,,,,,False,SC5103,Debt,4947.35,17.65,Online,Transaction remark 401
+119,SWP,53162.88,2023-05-08,Pending,DEF Balanced Fund,,,,,,,,,False,SC7909,Equity,853.7,62.27,Offline,Transaction remark 402
+102,SIP,58300.96,2025-03-19,Pending,DEF Balanced Fund,,,Yearly,2025-03-19,2026-03-19,2025-04-18,8,28,True,SC3336,Debt,302.31,192.85,Offline,Transaction remark 403
+105,SWP,8806.27,2024-11-15,Pending,DEF Balanced Fund,,,,,,,,,False,SC2454,Debt,117.32,75.06,Offline,Transaction remark 404
+115,LUMPSUM,3665.53,2023-08-28,Pending,ABC Equity Fund,,,,,,,,,False,SC7662,Cash,40.62,90.24,Online,Transaction remark 405
+126,SWP,65168.01,2024-11-25,Pending,ABC Equity Fund,,,,,,,,,False,SC6673,Debt,434.71,149.91,Online,Transaction remark 406
+106,SIP,79518.97,2024-02-20,Failed,DEF Balanced Fund,,,Quarterly,2024-02-20,2025-02-19,2024-03-21,6,31,True,SC2846,Cash,1150.43,69.12,Online,Transaction remark 407
+106,SWP,79462.01,2024-12-03,Pending,ABC Equity Fund,,,,,,,,,False,SC2751,Equity,2046.04,38.84,Offline,Transaction remark 408
+103,LUMPSUM,62873.65,2024-05-26,Completed,ABC Equity Fund,,,,,,,,,False,SC3296,Cash,5973.83,10.52,Offline,Transaction remark 409
+139,SIP,13748.6,2024-04-14,Pending,ABC Equity Fund,,,Monthly,2024-04-14,2025-04-14,2024-05-14,11,22,True,SC9119,Debt,160.06,85.9,Offline,Transaction remark 410
+97,STP,59398.39,2023-09-19,Failed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Quarterly,2023-09-19,2024-09-18,2023-10-19,7,21,True,SC2910,Debt,645.61,92.0,Online,Transaction remark 411
+117,LUMPSUM,90027.61,2023-11-18,Failed,DEF Balanced Fund,,,,,,,,,False,SC6415,Cash,893.61,100.75,Online,Transaction remark 412
+113,SWP,66881.6,2024-12-31,Completed,DEF Balanced Fund,,,,,,,,,False,SC3460,Cash,346.61,192.96,Online,Transaction remark 413
+140,SWP,75707.11,2023-02-08,Failed,XYZ Debt Fund,,,,,,,,,False,SC8913,Debt,789.88,95.85,Offline,Transaction remark 414
+120,SWP,95891.81,2024-05-01,Completed,ABC Equity Fund,,,,,,,,,False,SC1330,Equity,1514.42,63.32,Offline,Transaction remark 415
+122,SIP,51839.52,2023-04-20,Pending,DEF Balanced Fund,,,Quarterly,2023-04-20,2024-04-19,2023-05-20,6,32,True,SC9067,Cash,484.57,106.98,Online,Transaction remark 416
+116,SIP,15134.78,2024-07-11,Completed,ABC Equity Fund,,,Yearly,2024-07-11,2025-07-11,2024-08-10,11,32,True,SC5116,Cash,136.83,110.61,Online,Transaction remark 417
+117,SWP,42374.62,2025-01-11,Pending,ABC Equity Fund,,,,,,,,,False,SC1717,Equity,419.91,100.91,Online,Transaction remark 418
+95,SWP,16997.24,2023-07-07,Completed,PQR Liquid Fund,,,,,,,,,False,SC9283,Debt,157.14,108.17,Online,Transaction remark 419
+119,LUMPSUM,96762.16,2025-02-05,Completed,PQR Liquid Fund,,,,,,,,,False,SC9045,Debt,5704.49,16.96,Offline,Transaction remark 420
+133,SWP,60561.46,2024-02-27,Failed,PQR Liquid Fund,,,,,,,,,False,SC7092,Equity,575.02,105.32,Offline,Transaction remark 421
+124,SWP,65926.83,2025-01-05,Pending,PQR Liquid Fund,,,,,,,,,False,SC9408,Cash,1056.28,62.41,Offline,Transaction remark 422
+119,SWP,43309.99,2024-10-10,Failed,ABC Equity Fund,,,,,,,,,False,SC5854,Cash,1816.23,23.85,Offline,Transaction remark 423
+139,SWP,28038.99,2024-10-26,Failed,DEF Balanced Fund,,,,,,,,,False,SC1164,Debt,330.6,84.81,Online,Transaction remark 424
+124,SIP,47944.27,2023-01-29,Pending,PQR Liquid Fund,,,Monthly,2023-01-29,2024-01-29,2023-02-28,5,22,True,SC5056,Cash,2318.84,20.68,Online,Transaction remark 425
+80,STP,59322.59,2024-08-10,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Yearly,2024-08-10,2025-08-10,2024-09-09,7,15,True,SC3374,Equity,433.0,137.0,Offline,Transaction remark 426
+138,SWP,16807.34,2024-08-29,Pending,XYZ Debt Fund,,,,,,,,,False,SC8646,Cash,104.39,161.01,Offline,Transaction remark 427
+109,SIP,67318.26,2024-05-09,Completed,DEF Balanced Fund,,,Quarterly,2024-05-09,2025-05-09,2024-06-08,1,15,True,SC9694,Cash,866.15,77.72,Offline,Transaction remark 428
+98,SWP,36358.37,2024-06-27,Pending,PQR Liquid Fund,,,,,,,,,False,SC7575,Debt,289.17,125.73,Offline,Transaction remark 429
+96,SWP,99116.6,2024-01-23,Completed,DEF Balanced Fund,,,,,,,,,False,SC8757,Cash,624.95,158.6,Online,Transaction remark 430
+123,STP,43123.51,2023-10-01,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Yearly,2023-10-01,2024-09-30,2023-10-31,9,34,True,SC3138,Debt,749.19,57.56,Offline,Transaction remark 431
+139,SIP,55399.74,2023-08-09,Failed,XYZ Debt Fund,,,Yearly,2023-08-09,2024-08-08,2023-09-08,12,30,True,SC1594,Equity,1177.57,47.05,Offline,Transaction remark 432
+136,SIP,76919.55,2024-12-26,Pending,DEF Balanced Fund,,,Quarterly,2024-12-26,2025-12-26,2025-01-25,6,23,True,SC9611,Debt,453.81,169.5,Offline,Transaction remark 433
+117,SIP,15140.43,2023-03-12,Completed,ABC Equity Fund,,,Monthly,2023-03-12,2024-03-11,2023-04-11,5,21,True,SC5236,Equity,108.93,138.99,Offline,Transaction remark 434
+102,LUMPSUM,38165.53,2024-01-26,Pending,XYZ Debt Fund,,,,,,,,,False,SC8035,Equity,394.71,96.69,Offline,Transaction remark 435
+103,SWP,81846.16,2024-09-14,Pending,DEF Balanced Fund,,,,,,,,,False,SC9009,Cash,539.27,151.77,Offline,Transaction remark 436
+106,SIP,20556.07,2024-06-07,Failed,XYZ Debt Fund,,,Monthly,2024-06-07,2025-06-07,2024-07-07,11,31,True,SC5409,Equity,505.05,40.7,Offline,Transaction remark 437
+91,STP,48454.73,2025-04-11,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Quarterly,2025-04-11,2026-04-11,2025-05-11,1,33,True,SC8229,Debt,290.44,166.83,Online,Transaction remark 438
+105,SIP,74579.09,2024-08-29,Pending,PQR Liquid Fund,,,Quarterly,2024-08-29,2025-08-29,2024-09-28,2,35,True,SC4664,Cash,4698.79,15.87,Offline,Transaction remark 439
+83,STP,92302.48,2023-08-16,Failed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Monthly,2023-08-16,2024-08-15,2023-09-15,2,26,True,SC3378,Equity,461.55,199.98,Offline,Transaction remark 440
+122,LUMPSUM,38557.17,2025-02-18,Completed,DEF Balanced Fund,,,,,,,,,False,SC2144,Debt,242.95,158.7,Online,Transaction remark 441
+134,SWP,67495.65,2024-07-17,Failed,PQR Liquid Fund,,,,,,,,,False,SC4218,Cash,425.34,158.69,Offline,Transaction remark 442
+112,SWP,24205.11,2024-08-31,Failed,XYZ Debt Fund,,,,,,,,,False,SC5118,Debt,189.53,127.71,Online,Transaction remark 443
+124,SWP,41744.86,2025-01-14,Completed,PQR Liquid Fund,,,,,,,,,False,SC2555,Cash,217.44,191.98,Online,Transaction remark 444
+138,SIP,15580.43,2024-12-26,Failed,DEF Balanced Fund,,,Quarterly,2024-12-26,2025-12-26,2025-01-25,4,17,True,SC4318,Equity,690.17,22.57,Online,Transaction remark 445
+118,STP,2602.96,2024-07-15,Failed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Yearly,2024-07-15,2025-07-15,2024-08-14,8,23,True,SC9712,Equity,16.48,157.95,Online,Transaction remark 446
+131,SWP,16840.21,2024-01-05,Completed,PQR Liquid Fund,,,,,,,,,False,SC3017,Debt,125.22,134.48,Online,Transaction remark 447
+123,STP,24354.66,2023-07-16,Pending,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Quarterly,2023-07-16,2024-07-15,2023-08-15,2,30,True,SC3010,Equity,1040.8,23.4,Online,Transaction remark 448
+80,STP,20893.34,2023-09-24,Pending,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Yearly,2023-09-24,2024-09-23,2023-10-24,10,33,True,SC2158,Equity,255.8,81.68,Online,Transaction remark 449
+125,LUMPSUM,82666.44,2024-08-27,Completed,PQR Liquid Fund,,,,,,,,,False,SC2019,Debt,578.7,142.85,Offline,Transaction remark 450
+106,SIP,76191.11,2025-01-18,Completed,XYZ Debt Fund,,,Monthly,2025-01-18,2026-01-18,2025-02-17,2,17,True,SC6015,Debt,1095.05,69.58,Offline,Transaction remark 451
+140,LUMPSUM,91068.08,2024-03-30,Failed,PQR Liquid Fund,,,,,,,,,False,SC8188,Debt,480.42,189.56,Offline,Transaction remark 452
+138,STP,44252.44,2024-09-03,Completed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Yearly,2024-09-03,2025-09-03,2024-10-03,12,21,True,SC1886,Debt,1014.37,43.63,Online,Transaction remark 453
+129,STP,91527.99,2023-11-03,Pending,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Monthly,2023-11-03,2024-11-02,2023-12-03,6,30,True,SC1493,Cash,457.67,199.99,Offline,Transaction remark 454
+93,SIP,5051.27,2025-01-21,Completed,PQR Liquid Fund,,,Monthly,2025-01-21,2026-01-21,2025-02-20,9,12,True,SC3075,Cash,130.85,38.6,Online,Transaction remark 455
+124,SIP,95819.82,2023-02-11,Pending,XYZ Debt Fund,,,Yearly,2023-02-11,2024-02-11,2023-03-13,8,20,True,SC7679,Cash,579.97,165.22,Online,Transaction remark 456
+89,SIP,93516.76,2024-11-07,Pending,XYZ Debt Fund,,,Yearly,2024-11-07,2025-11-07,2024-12-07,3,33,True,SC4580,Cash,1479.35,63.21,Offline,Transaction remark 457
+85,SIP,38373.61,2023-09-24,Pending,PQR Liquid Fund,,,Monthly,2023-09-24,2024-09-23,2023-10-24,7,18,True,SC9059,Equity,228.12,168.22,Offline,Transaction remark 458
+130,STP,31453.83,2023-09-16,Pending,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2023-09-16,2024-09-15,2023-10-16,9,30,True,SC1749,Debt,230.39,136.52,Online,Transaction remark 459
+83,SWP,29816.97,2023-08-09,Pending,XYZ Debt Fund,,,,,,,,,False,SC4494,Equity,153.16,194.68,Offline,Transaction remark 460
+118,LUMPSUM,44201.01,2025-01-24,Pending,DEF Balanced Fund,,,,,,,,,False,SC7344,Equity,470.0,94.04,Online,Transaction remark 461
+121,SIP,17115.89,2023-11-11,Completed,PQR Liquid Fund,,,Quarterly,2023-11-11,2024-11-10,2023-12-11,7,30,True,SC5377,Debt,99.01,172.87,Offline,Transaction remark 462
+83,LUMPSUM,88020.79,2024-07-07,Failed,PQR Liquid Fund,,,,,,,,,False,SC7512,Cash,1110.17,79.29,Online,Transaction remark 463
+117,SIP,11763.42,2023-04-27,Failed,ABC Equity Fund,,,Yearly,2023-04-27,2024-04-26,2023-05-27,10,28,True,SC6608,Cash,83.57,140.76,Online,Transaction remark 464
+117,STP,64002.2,2024-10-16,Failed,XYZ Debt Fund,XYZ Debt Fund,DEF Balanced Fund,Quarterly,2024-10-16,2025-10-16,2024-11-15,11,19,True,SC6534,Cash,382.19,167.46,Offline,Transaction remark 465
+118,STP,20244.29,2024-01-04,Failed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2024-01-04,2025-01-03,2024-02-03,6,12,True,SC3607,Equity,188.29,107.52,Offline,Transaction remark 466
+120,LUMPSUM,8209.84,2024-09-24,Failed,ABC Equity Fund,,,,,,,,,False,SC1843,Equity,138.02,59.48,Online,Transaction remark 467
+120,SWP,84836.34,2023-11-09,Completed,XYZ Debt Fund,,,,,,,,,False,SC7258,Equity,3996.21,21.23,Online,Transaction remark 468
+106,STP,2993.08,2025-04-15,Failed,ABC Equity Fund,ABC Equity Fund,PQR Liquid Fund,Quarterly,2025-04-15,2026-04-15,2025-05-15,1,33,True,SC5173,Equity,188.49,15.88,Offline,Transaction remark 469
+118,STP,40463.85,2023-03-13,Pending,PQR Liquid Fund,PQR Liquid Fund,DEF Balanced Fund,Monthly,2023-03-13,2024-03-12,2023-04-12,12,22,True,SC6140,Equity,223.29,181.22,Online,Transaction remark 470
+97,LUMPSUM,45594.79,2024-07-07,Failed,DEF Balanced Fund,,,,,,,,,False,SC4073,Debt,4398.94,10.36,Online,Transaction remark 471
+114,LUMPSUM,38599.8,2023-12-05,Failed,ABC Equity Fund,,,,,,,,,False,SC1832,Equity,240.78,160.31,Offline,Transaction remark 472
+118,LUMPSUM,43505.94,2024-07-22,Failed,PQR Liquid Fund,,,,,,,,,False,SC7134,Equity,254.0,171.28,Online,Transaction remark 473
+137,STP,15446.12,2024-08-21,Failed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2024-08-21,2025-08-21,2024-09-20,11,27,True,SC7058,Debt,98.26,157.2,Online,Transaction remark 474
+115,STP,59646.56,2023-07-24,Failed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Quarterly,2023-07-24,2024-07-23,2023-08-23,5,14,True,SC4352,Cash,571.01,104.46,Online,Transaction remark 475
+132,LUMPSUM,8266.22,2024-12-09,Completed,DEF Balanced Fund,,,,,,,,,False,SC8750,Equity,57.91,142.74,Online,Transaction remark 476
+137,SIP,15612.35,2024-07-17,Failed,PQR Liquid Fund,,,Monthly,2024-07-17,2025-07-17,2024-08-16,11,12,True,SC1223,Cash,232.64,67.11,Offline,Transaction remark 477
+91,STP,48216.19,2024-03-19,Failed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2024-03-19,2025-03-19,2024-04-18,6,29,True,SC5081,Cash,264.5,182.29,Offline,Transaction remark 478
+110,STP,95831.5,2023-02-20,Completed,ABC Equity Fund,ABC Equity Fund,XYZ Debt Fund,Quarterly,2023-02-20,2024-02-20,2023-03-22,2,27,True,SC9082,Cash,678.25,141.29,Offline,Transaction remark 479
+120,SWP,39014.68,2023-07-02,Failed,DEF Balanced Fund,,,,,,,,,False,SC1939,Debt,675.62,57.75,Online,Transaction remark 480
+124,STP,55925.8,2023-02-03,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2023-02-03,2024-02-03,2023-03-05,1,15,True,SC9429,Equity,846.38,66.08,Online,Transaction remark 481
+102,LUMPSUM,75046.15,2024-09-16,Pending,PQR Liquid Fund,,,,,,,,,False,SC2855,Equity,479.71,156.44,Online,Transaction remark 482
+104,SIP,10960.66,2025-04-22,Completed,ABC Equity Fund,,,Monthly,2025-04-22,2026-04-22,2025-05-22,7,25,True,SC9360,Equity,169.59,64.63,Online,Transaction remark 483
+109,STP,82904.95,2023-01-30,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Yearly,2023-01-30,2024-01-30,2023-03-01,8,32,True,SC9279,Debt,725.24,114.31,Online,Transaction remark 484
+84,SIP,79250.36,2024-10-18,Completed,XYZ Debt Fund,,,Monthly,2024-10-18,2025-10-18,2024-11-17,10,19,True,SC4666,Debt,1479.33,53.57,Offline,Transaction remark 485
+111,STP,34831.44,2023-06-23,Completed,XYZ Debt Fund,XYZ Debt Fund,PQR Liquid Fund,Quarterly,2023-06-23,2024-06-22,2023-07-23,8,14,True,SC4490,Debt,244.83,142.27,Online,Transaction remark 486
+127,SIP,66149.77,2023-06-17,Failed,ABC Equity Fund,,,Quarterly,2023-06-17,2024-06-16,2023-07-17,5,31,True,SC9312,Equity,955.53,69.23,Offline,Transaction remark 487
+96,STP,95968.98,2024-04-28,Completed,PQR Liquid Fund,PQR Liquid Fund,XYZ Debt Fund,Monthly,2024-04-28,2025-04-28,2024-05-28,3,17,True,SC6995,Equity,1023.36,93.78,Offline,Transaction remark 488
+118,SIP,53658.19,2024-03-11,Pending,DEF Balanced Fund,,,Monthly,2024-03-11,2025-03-11,2024-04-10,5,19,True,SC9655,Debt,589.43,91.03,Offline,Transaction remark 489
+86,LUMPSUM,72009.15,2023-01-01,Failed,ABC Equity Fund,,,,,,,,,False,SC7975,Equity,3795.43,18.97,Online,Transaction remark 490
+123,STP,78317.34,2024-09-11,Pending,DEF Balanced Fund,DEF Balanced Fund,ABC Equity Fund,Yearly,2024-09-11,2025-09-11,2024-10-11,6,26,True,SC9040,Cash,413.49,189.41,Online,Transaction remark 491
+131,STP,25399.26,2025-01-21,Completed,XYZ Debt Fund,XYZ Debt Fund,ABC Equity Fund,Quarterly,2025-01-21,2026-01-21,2025-02-20,2,22,True,SC6612,Debt,203.57,124.77,Offline,Transaction remark 492
+92,LUMPSUM,97418.99,2024-12-21,Pending,ABC Equity Fund,,,,,,,,,False,SC8975,Equity,758.13,128.5,Offline,Transaction remark 493
+107,LUMPSUM,9145.26,2024-08-12,Completed,PQR Liquid Fund,,,,,,,,,False,SC9587,Debt,106.65,85.75,Online,Transaction remark 494
+92,LUMPSUM,56050.22,2024-12-13,Completed,ABC Equity Fund,,,,,,,,,False,SC8668,Equity,490.29,114.32,Offline,Transaction remark 495
+103,SIP,76255.92,2024-12-16,Pending,ABC Equity Fund,,,Yearly,2024-12-16,2025-12-16,2025-01-15,4,18,True,SC3969,Debt,1282.86,59.44,Online,Transaction remark 496
+133,SWP,1242.66,2023-03-25,Failed,PQR Liquid Fund,,,,,,,,,False,SC8844,Debt,13.73,90.51,Online,Transaction remark 497
+135,LUMPSUM,77371.64,2023-02-08,Failed,PQR Liquid Fund,,,,,,,,,False,SC7242,Cash,2550.72,30.33,Offline,Transaction remark 498
+118,STP,97143.4,2025-03-20,Completed,ABC Equity Fund,ABC Equity Fund,DEF Balanced Fund,Monthly,2025-03-20,2026-03-20,2025-04-19,10,29,True,SC2578,Equity,2706.53,35.89,Offline,Transaction remark 499
+104,SWP,96597.94,2025-01-04,Failed,DEF Balanced Fund,,,,,,,,,False,SC9302,Cash,8640.79,11.18,Online,Transaction remark 500
