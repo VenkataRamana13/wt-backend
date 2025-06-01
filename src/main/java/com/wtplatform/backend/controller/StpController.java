@@ -5,6 +5,7 @@ import com.wtplatform.backend.model.Transaction;
 import com.wtplatform.backend.service.StpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +16,8 @@ public class StpController {
     private final StpService stpService;
 
     @GetMapping("/summary")
-    public ResponseEntity<StpSummaryDTO> getStpSummary(@RequestParam Long userId) {
-        return ResponseEntity.ok(stpService.getStpSummary(userId));
+    public ResponseEntity<StpSummaryDTO> getStpSummary(Authentication authentication) {
+        return ResponseEntity.ok(stpService.getStpSummaryByEmail(authentication.getName()));
     }
 
     @PostMapping("/validate")

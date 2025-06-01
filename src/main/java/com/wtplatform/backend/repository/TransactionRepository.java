@@ -2,6 +2,7 @@ package com.wtplatform.backend.repository;
 
 import com.wtplatform.backend.model.Transaction;
 import com.wtplatform.backend.dto.StpTrendDTO;
+import com.wtplatform.backend.projection.MonthlyTrendProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -99,31 +100,31 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query("SELECT COUNT(t) FROM Transaction t " +
            "WHERE t.client.user.id = :userId " +
-           "AND t.type = 'STP' " +
-           "AND t.status = 'ACTIVE' " +
+           "AND LOWER(t.type) = 'stp' " +
+           "AND LOWER(t.status) = 'active' " +
            "AND t.endDate > CURRENT_DATE")
     Long countActiveStpsByUserId(@Param("userId") Long userId);
 
     @Query("SELECT COUNT(t) FROM Transaction t " +
            "WHERE t.client.user.id = :userId " +
-           "AND t.type = 'STP' " +
+           "AND LOWER(t.type) = 'stp' " +
            "AND t.nextTransactionDate = :today " +
-           "AND t.status = 'ACTIVE'")
+           "AND LOWER(t.status) = 'active'")
     Long countStpsExecutingToday(@Param("userId") Long userId, @Param("today") LocalDate today);
 
     @Query("SELECT COUNT(t) FROM Transaction t " +
            "WHERE t.client.user.id = :userId " +
-           "AND t.type = 'STP' " +
+           "AND LOWER(t.type) = 'stp' " +
            "AND t.endDate BETWEEN :startDate AND :endDate " +
-           "AND t.status = 'ACTIVE'")
+           "AND LOWER(t.status) = 'active'")
     Long countStpsExpiringBetween(@Param("userId") Long userId, 
                                  @Param("startDate") LocalDate startDate,
                                  @Param("endDate") LocalDate endDate);
 
     @Query("SELECT COUNT(t) FROM Transaction t " +
            "WHERE t.client.user.id = :userId " +
-           "AND t.type = 'STP' " +
-           "AND t.status = 'ACTIVE' " +
+           "AND LOWER(t.type) = 'stp' " +
+           "AND LOWER(t.status) = 'active' " +
            "AND NOT EXISTS (SELECT 1 FROM FundBalance fb " +
            "               WHERE fb.fundId = t.fromFund " +
            "               AND fb.balance >= t.amount)")
@@ -145,17 +146,59 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     // Additional helper methods for STP operations
     @Query("SELECT t FROM Transaction t " +
-           "WHERE t.type = 'STP' " +
-           "AND t.status = 'ACTIVE' " +
+           "WHERE LOWER(t.type) = 'stp' " +
+           "AND LOWER(t.status) = 'active' " +
            "AND t.nextTransactionDate <= CURRENT_DATE")
     List<Transaction> findPendingStpTransactions();
 
     @Query("SELECT t FROM Transaction t " +
-           "WHERE t.type = 'STP' " +
+           "WHERE LOWER(t.type) = 'stp' " +
            "AND t.client.user.id = :userId " +
-           "AND t.status = 'ACTIVE'")
+           "AND LOWER(t.status) = 'active'")
     List<Transaction> findActiveStpsByUserId(@Param("userId") Long userId);
 
-    @Query(value = "SELECT DATE_FORMAT(t.transaction_date, '%Y-%m'), SUM(t.amount) FROM transactions t WHERE t.client_id = :userId AND t.type = 'STP' AND t.status = 'COMPLETED' GROUP BY DATE_FORMAT(t.transaction_date, '%Y-%m')", nativeQuery = true)
-    List<Object[]> getMonthlyStpTrendsNative(@Param("userId") Long userId);
+    @Query(nativeQuery = true, value = """
+            /* Debug: STP Monthly Trends Query */
+            WITH last_12_months AS (
+                SELECT TO_CHAR(date_trunc('month', current_date - (n || ' months')::interval), 'YYYY-MM') as month
+                FROM generate_series(0, 11) n
+            ),
+            stp_data AS (
+                SELECT 
+                    TO_CHAR(transaction_date, 'YYYY-MM') as month,
+                    COUNT(*) as count,
+                    COALESCE(SUM(amount), 0) as total_amount
+                FROM transactions_extended t
+                WHERE client_id IN (
+                    SELECT id FROM clients WHERE user_id = :userId
+                )
+                AND LOWER(transaction_type) = 'stp'
+                AND LOWER(status) = 'completed'
+                AND transaction_date >= date_trunc('month', current_date - interval '11 months')
+                GROUP BY TO_CHAR(transaction_date, 'YYYY-MM')
+            )
+            SELECT 
+                m.month,
+                COALESCE(s.count, 0) as count,
+                COALESCE(s.total_amount, 0) as total_amount
+            FROM last_12_months m
+            LEFT JOIN stp_data s ON s.month = m.month
+            ORDER BY m.month ASC
+            """)
+    List<MonthlyTrendProjection> getMonthlyStpTrendsNative(@Param("userId") Long userId);
+
+    /**
+     * Debug method to check raw transaction data
+     */
+    @Query(nativeQuery = true, value = """
+            /* Debug: Raw STP Transactions Query */
+            SELECT 
+                t.*,
+                c.user_id
+            FROM transactions_extended t
+            JOIN clients c ON c.id = t.client_id
+            WHERE c.user_id = :userId
+            AND LOWER(transaction_type) = 'stp'
+            """)
+    List<Object[]> debugRawStpTransactions(@Param("userId") Long userId);
 } 

@@ -6,8 +6,11 @@ import com.wtplatform.backend.exception.InsufficientBalanceException;
 import com.wtplatform.backend.exception.InvalidTransactionException;
 import com.wtplatform.backend.model.Transaction;
 import com.wtplatform.backend.model.FundBalance;
+import com.wtplatform.backend.model.User;
+import com.wtplatform.backend.projection.MonthlyTrendProjection;
 import com.wtplatform.backend.repository.TransactionRepository;
 import com.wtplatform.backend.repository.FundBalanceRepository;
+import com.wtplatform.backend.repository.UserRepository;
 import com.wtplatform.backend.service.StpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,32 +33,95 @@ public class StpServiceImpl implements StpService {
     @Autowired
     private FundBalanceRepository fundBalanceRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public StpSummaryDTO getStpSummaryByEmail(String email) {
+        log.debug("Getting STP summary for email: {}", email);
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        log.debug("Found user with ID: {}, email: {}", user.getId(), user.getEmail());
+        return getStpSummary(user.getId());
+    }
+
     @Override
     public StpSummaryDTO getStpSummary(Long userId) {
+        log.debug("Starting getStpSummary calculation for userId: {}", userId);
         LocalDate today = LocalDate.now();
         LocalDate threemonthsLater = today.plusMonths(3);
+        log.debug("Date range for expiring STPs: today={}, threemonthsLater={}", today, threemonthsLater);
 
+        // Get active STPs count
         Long activeStps = transactionRepository.countActiveStpsByUserId(userId);
+        log.debug("Active STPs count for userId {}: {}", userId, activeStps);
+
+        // Get executing today count
         Long executingToday = transactionRepository.countStpsExecutingToday(userId, today);
+        log.debug("STPs executing today for userId {}: {}", userId, executingToday);
+
+        // Get expiring in next 3 months
         Long expiringNext3Months = transactionRepository.countStpsExpiringBetween(userId, today, threemonthsLater);
+        log.debug("STPs expiring in next 3 months for userId {}: {}", userId, expiringNext3Months);
+
+        // Get zero balance count
         Long zeroBalanceCount = transactionRepository.countStpsWithZeroBalance(userId);
+        log.debug("STPs with zero balance for userId {}: {}", userId, zeroBalanceCount);
         
-        // Use native query and map results to DTOs
-        List<Object[]> trendResults = transactionRepository.getMonthlyStpTrendsNative(userId);
+        // Get monthly trends with detailed logging
+        log.debug("Fetching monthly STP trends for userId: {}", userId);
+        List<MonthlyTrendProjection> trendResults = transactionRepository.getMonthlyStpTrendsNative(userId);
+        log.debug("Retrieved {} monthly trend records for userId {}", trendResults.size(), userId);
+        
+        // Log each trend result in detail
+        if (trendResults.isEmpty()) {
+            log.debug("No trend results found for userId {}", userId);
+        } else {
+            log.debug("Detailed trend results for userId {}:", userId);
+            trendResults.forEach(trend -> {
+                try {
+                    String month = trend.getMonth();
+                    BigInteger count = trend.getCount();
+                    BigDecimal amount = trend.getTotalAmount();
+                    log.debug("Trend data - Month: {}, Count: {}, Amount: {}", 
+                        month != null ? month : "null",
+                        count != null ? count.toString() : "null",
+                        amount != null ? amount : "null");
+                } catch (Exception e) {
+                    log.error("Error accessing trend data: {}", e.getMessage(), e);
+                }
+            });
+        }
+
+        // Map to DTOs with validation
         List<StpTrendDTO> monthlyTrends = trendResults.stream()
-            .map(row -> new StpTrendDTO(
-                (String) row[0],  // month
-                (BigDecimal) row[1]  // amount
-            ))
+            .map(trend -> {
+                StpTrendDTO dto = new StpTrendDTO(
+                    trend.getMonth(),
+                    trend.getTotalAmount(),
+                    trend.getCount()
+                );
+                log.debug("Mapped trend to DTO - Month: {}, Amount: {}, Count: {}", 
+                    dto.getMonth() != null ? dto.getMonth() : "null",
+                    dto.getAmount() != null ? dto.getAmount() : "null",
+                    dto.getCount() != null ? dto.getCount() : "null");
+                return dto;
+            })
             .collect(Collectors.toList());
 
-        return StpSummaryDTO.builder()
+        log.debug("Mapped {} trend records to DTOs", monthlyTrends.size());
+
+        // Build and validate summary
+        StpSummaryDTO summary = StpSummaryDTO.builder()
                 .activeStps(activeStps)
                 .executingToday(executingToday)
                 .expiringNext3Months(expiringNext3Months)
                 .zeroBalanceCount(zeroBalanceCount)
                 .monthlyTrends(monthlyTrends)
                 .build();
+                
+        log.debug("Final STP summary for userId {}: {}", userId, summary);
+        return summary;
     }
 
     @Override
@@ -123,10 +190,12 @@ public class StpServiceImpl implements StpService {
 
     @Override
     public void debugStpTrendTypes(Long userId) {
-        List<Object[]> results = transactionRepository.getMonthlyStpTrendsNative(userId);
-        for (Object[] row : results) {
-            log.info("Month value: {}, type: {}", row[0], row[0] != null ? row[0].getClass() : "null");
-            log.info("Amount value: {}, type: {}", row[1], row[1] != null ? row[1].getClass() : "null");
+        List<MonthlyTrendProjection> results = transactionRepository.getMonthlyStpTrendsNative(userId);
+        for (MonthlyTrendProjection trend : results) {
+            log.info("Month value: {}, Amount value: {}, Count: {}", 
+                trend.getMonth(), 
+                trend.getTotalAmount(),
+                trend.getCount());
         }
     }
 } 
