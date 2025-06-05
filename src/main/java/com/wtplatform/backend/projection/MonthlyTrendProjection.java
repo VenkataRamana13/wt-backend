@@ -5,6 +5,8 @@ import java.math.BigInteger;
 
 public interface MonthlyTrendProjection {
     String getMonth();
-    BigInteger getCount();
     BigDecimal getTotalAmount();
+    BigInteger getCount();
+    String getFromFund();
+    String getToFund();
 } 

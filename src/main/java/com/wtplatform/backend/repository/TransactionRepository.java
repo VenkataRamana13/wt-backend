@@ -164,23 +164,27 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                 FROM generate_series(0, 11) n
             ),
             stp_data AS (
-                SELECT 
-                    TO_CHAR(transaction_date, 'YYYY-MM') as month,
-                    COUNT(*) as count,
-                    COALESCE(SUM(amount), 0) as total_amount
-                FROM transactions_extended t
-                WHERE client_id IN (
-                    SELECT id FROM clients WHERE user_id = :userId
-                )
-                AND LOWER(transaction_type) = 'stp'
-                AND LOWER(status) = 'completed'
+            SELECT 
+                TO_CHAR(transaction_date, 'YYYY-MM') as month,
+                COUNT(*) as count,
+                COALESCE(SUM(amount), 0) as total_amount,
+                STRING_AGG(DISTINCT from_fund, ', ' ORDER BY from_fund) as from_fund,
+                STRING_AGG(DISTINCT to_fund, ', ' ORDER BY to_fund) as to_fund
+            FROM transactions_extended t
+            WHERE client_id IN (
+                SELECT id FROM clients WHERE user_id = :userId
+            )
+            AND LOWER(transaction_type) = 'stp'
+            AND LOWER(status) = 'completed'
                 AND transaction_date >= date_trunc('month', current_date - interval '11 months')
-                GROUP BY TO_CHAR(transaction_date, 'YYYY-MM')
+            GROUP BY TO_CHAR(transaction_date, 'YYYY-MM')
             )
             SELECT 
                 m.month,
                 COALESCE(s.count, 0) as count,
-                COALESCE(s.total_amount, 0) as total_amount
+                COALESCE(s.total_amount, 0) as total_amount,
+                COALESCE(s.from_fund, '') as from_fund,
+                COALESCE(s.to_fund, '') as to_fund
             FROM last_12_months m
             LEFT JOIN stp_data s ON s.month = m.month
             ORDER BY m.month ASC
@@ -201,4 +205,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             AND LOWER(transaction_type) = 'stp'
             """)
     List<Object[]> debugRawStpTransactions(@Param("userId") Long userId);
+
+    @Query("SELECT t FROM Transaction t " +
+           "JOIN t.client c " +
+           "WHERE c.user.id = :userId " +
+           "AND LOWER(t.type) = LOWER(:type)")
+    List<Transaction> findByClientUserIdAndType(@Param("userId") Long userId, @Param("type") String type);
 } 

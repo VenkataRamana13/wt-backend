@@ -2,6 +2,7 @@ package com.wtplatform.backend.service.impl;
 
 import com.wtplatform.backend.dto.StpSummaryDTO;
 import com.wtplatform.backend.dto.StpTrendDTO;
+import com.wtplatform.backend.dto.StpTransactionDTO;
 import com.wtplatform.backend.exception.InsufficientBalanceException;
 import com.wtplatform.backend.exception.InvalidTransactionException;
 import com.wtplatform.backend.model.Transaction;
@@ -99,12 +100,16 @@ public class StpServiceImpl implements StpService {
                 StpTrendDTO dto = new StpTrendDTO(
                     trend.getMonth(),
                     trend.getTotalAmount(),
-                    trend.getCount()
+                    trend.getCount(),
+                    trend.getFromFund(),
+                    trend.getToFund()
                 );
-                log.debug("Mapped trend to DTO - Month: {}, Amount: {}, Count: {}", 
+                log.debug("Mapped trend to DTO - Month: {}, Amount: {}, Count: {}, FromFund: {}, ToFund: {}", 
                     dto.getMonth() != null ? dto.getMonth() : "null",
                     dto.getAmount() != null ? dto.getAmount() : "null",
-                    dto.getCount() != null ? dto.getCount() : "null");
+                    dto.getCount() != null ? dto.getCount() : "null",
+                    dto.getFromFund() != null ? dto.getFromFund() : "null",
+                    dto.getToFund() != null ? dto.getToFund() : "null");
                 return dto;
             })
             .collect(Collectors.toList());
@@ -197,5 +202,33 @@ public class StpServiceImpl implements StpService {
                 trend.getTotalAmount(),
                 trend.getCount());
         }
+    }
+
+    @Override
+    public List<StpTransactionDTO> getStpListByEmail(String email) {
+        log.debug("Getting STP list for email: {}", email);
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        List<Transaction> stpTransactions = transactionRepository.findByClientUserIdAndType(user.getId(), "STP");
+        
+        return stpTransactions.stream()
+            .map(txn -> StpTransactionDTO.builder()
+                .id(txn.getId())
+                .clientId(txn.getClient().getId().toString())
+                .clientName(txn.getClient().getName())
+                .amount(txn.getAmount())
+                .fromFund(txn.getFromFund())
+                .toFund(txn.getToFund())
+                .frequency(txn.getFrequency())
+                .nextTransactionDate(txn.getNextTransactionDate())
+                .startDate(txn.getStartDate())
+                .endDate(txn.getEndDate())
+                .remainingAmount(txn.getSourceBalance())
+                .sourceBalance(txn.getSourceBalance())
+                .status(txn.getStatus())
+                .remarks(txn.getRemarks())
+                .build())
+            .collect(Collectors.toList());
     }
 } 
