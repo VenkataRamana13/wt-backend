@@ -23,4 +23,44 @@ public class StpTrendDTO {
         this.fromFund = fromFund;
         this.toFund = toFund;
     }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigInteger getCount() {
+        return count;
+    }
+
+    public void setCount(BigInteger count) {
+        this.count = count;
+    }
+
+    public String getFromFund() {
+        return fromFund;
+    }
+
+    public void setFromFund(String fromFund) {
+        this.fromFund = fromFund;
+    }
+
+    public String getToFund() {
+        return toFund;
+    }
+
+    public void setToFund(String toFund) {
+        this.toFund = toFund;
+    }
 } 

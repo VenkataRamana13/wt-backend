@@ -128,4 +128,208 @@ public class Transaction {
     public LocalDate getNextExecutionDate() {
         return this.nextTransactionDate;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
+    }
+
+    public String getSchemeCode() {
+        return schemeCode;
+    }
+
+    public void setSchemeCode(String schemeCode) {
+        this.schemeCode = schemeCode;
+    }
+
+    public String getAssetClass() {
+        return assetClass;
+    }
+
+    public void setAssetClass(String assetClass) {
+        this.assetClass = assetClass;
+    }
+
+    public LocalDate getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDate transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getUnits() {
+        return units;
+    }
+
+    public void setUnits(BigDecimal units) {
+        this.units = units;
+    }
+
+    public BigDecimal getNavAtTransactionTime() {
+        return navAtTransactionTime;
+    }
+
+    public void setNavAtTransactionTime(BigDecimal navAtTransactionTime) {
+        this.navAtTransactionTime = navAtTransactionTime;
+    }
+
+    public Boolean getIsRecurring() {
+        return isRecurring;
+    }
+
+    public void setIsRecurring(Boolean isRecurring) {
+        this.isRecurring = isRecurring;
+    }
+
+    public Integer getInstallmentNumber() {
+        return installmentNumber;
+    }
+
+    public void setInstallmentNumber(Integer installmentNumber) {
+        this.installmentNumber = installmentNumber;
+    }
+
+    public Integer getTotalInstallments() {
+        return totalInstallments;
+    }
+
+    public void setTotalInstallments(Integer totalInstallments) {
+        this.totalInstallments = totalInstallments;
+    }
+
+    public LocalDate getNextTransactionDate() {
+        return nextTransactionDate;
+    }
+
+    public void setNextTransactionDate(LocalDate nextTransactionDate) {
+        this.nextTransactionDate = nextTransactionDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getFromFund() {
+        return fromFund;
+    }
+
+    public void setFromFund(String fromFund) {
+        this.fromFund = fromFund;
+    }
+
+    public String getToFund() {
+        return toFund;
+    }
+
+    public void setToFund(String toFund) {
+        this.toFund = toFund;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
 } 
