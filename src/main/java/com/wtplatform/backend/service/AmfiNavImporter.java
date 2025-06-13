@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -40,6 +42,9 @@ public class AmfiNavImporter {
     
     @Value("${amfi.read.timeout:60000}")
     private int readTimeout;
+
+    private String currentAmcName;
+    private String currentCategory;
 
     @Scheduled(cron = "0 30 23 * * *", zone = "Asia/Kolkata") // every day at 11:30 AM IST
     public void fetchAndProcessNavFile() {
@@ -59,8 +64,34 @@ public class AmfiNavImporter {
                 String line;
                 int processedCount = 0;
                 LocalDate today = LocalDate.now();
+                currentAmcName = null;
+                currentCategory = null;
 
                 while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    
+                    // Skip empty lines
+                    if (line.isEmpty()) {
+                        continue;
+                    }
+                    
+                    // Check if this is an AMC name line
+                    if (!line.contains(";") && line.contains("Mutual Fund")) {
+                        currentAmcName = line.trim();
+                        continue;
+                    }
+                    
+                    // Check if this is a category line (section header)
+                    if (!line.contains(";") && line.contains("Open Ended Schemes")) {
+                        currentCategory = line.trim();
+                        continue;
+                    }
+                    
+                    // Skip header and section header lines
+                    if (!line.contains(";") || line.equalsIgnoreCase("Scheme Code")) {
+                        continue;
+                    }
+
                     String[] fields = line.split(";");
                     if (fields.length < 6 || fields[0].equalsIgnoreCase("Scheme Code")) {
                         continue;
@@ -133,9 +164,13 @@ public class AmfiNavImporter {
                     return newScheme;
                 });
 
-            // Update NAV information
+            // Update scheme information
+            scheme.setSchemeName(schemeName);
+            scheme.setIsin(isin);
             scheme.setLastNavValue(nav);
             scheme.setLastNavDate(navDate);
+            scheme.setAmcName(currentAmcName); // Set the current AMC name
+            scheme.setCategory(currentCategory); // Set the current category
             schemeRepo.save(scheme);
         } catch (Exception e) {
             log.error("Error creating/updating scheme {}: {}", schemeCode, e.getMessage());
@@ -144,10 +179,48 @@ public class AmfiNavImporter {
 
     @Transactional
     protected void saveNavBatch(List<NavHistory> navBatch, Map<String, NavUpdateInfo> latestNavs) {
+        if (navBatch.isEmpty()) {
+            return;
+        }
+
+        log.info("Starting to save batch of {} NAV entries", navBatch.size());
+        Set<LocalDate> uniqueDates = navBatch.stream()
+                .map(NavHistory::getNavDate)
+                .collect(Collectors.toSet());
+        log.info("Unique NAV dates in batch: {}", uniqueDates);
+
+        // Add debug logging for each NavHistory object
+        for (NavHistory nav : navBatch) {
+            log.debug("NavHistory before save - ID: {}, FundId: {}, NavDate: {}, Nav: {}", 
+                nav.getId(), nav.getFundId(), nav.getNavDate(), nav.getNav());
+        }
+
         try {
-            // Batch save nav history
-            navRepo.saveAll(navBatch);
-            log.debug("Saved {} NAV history records", navBatch.size());
+            List<NavHistory> savedHistory = navRepo.saveAll(navBatch);
+            log.info("Saved {} NAV history entries", savedHistory.size());
+            
+            // Add debug logging for saved entries
+            for (NavHistory saved : savedHistory) {
+                log.debug("NavHistory after save - ID: {}, FundId: {}, NavDate: {}, Nav: {}", 
+                    saved.getId(), saved.getFundId(), saved.getNavDate(), saved.getNav());
+            }
+
+            // Update AMFI schemes
+            for (Map.Entry<String, NavUpdateInfo> entry : latestNavs.entrySet()) {
+                String schemeCode = entry.getKey();
+                NavUpdateInfo updateInfo = entry.getValue();
+                
+                log.debug("Updating AMFI scheme - Code: {}, Date: {}, NAV: {}", 
+                    schemeCode, updateInfo.date, updateInfo.nav);
+                
+                schemeRepo.updateNav(
+                    schemeCode,
+                    updateInfo.nav,
+                    updateInfo.date
+                );
+            }
+            log.info("Updated {} AMFI schemes with latest NAV", latestNavs.size());
+
         } catch (Exception e) {
             log.error("Error saving batch", e);
             throw e; // Re-throw to trigger transaction rollback
