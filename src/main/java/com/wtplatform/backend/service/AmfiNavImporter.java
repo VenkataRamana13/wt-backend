@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +47,9 @@ public class AmfiNavImporter {
     private String currentAmcName;
     private String currentCategory;
 
-    @Scheduled(cron = "0 30 23 * * *", zone = "Asia/Kolkata") // every day at 11:30 AM IST
+    @Scheduled(cron = "0 22 22 * * *", zone = "Asia/Kolkata") // every day at 7:26 PM IST
     public void fetchAndProcessNavFile() {
-        log.info("Starting AMFI NAV import process");
+        log.info("Starting AMFI NAV import process at {}", LocalDateTime.now());
         
         HttpURLConnection connection = null;
         List<NavHistory> navBatch = new ArrayList<>();
@@ -59,6 +60,8 @@ public class AmfiNavImporter {
             connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(connectionTimeout);
             connection.setReadTimeout(readTimeout);
+            
+            log.info("Established connection to AMFI URL. Response code: {}", connection.getResponseCode());
             
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String line;
@@ -136,17 +139,21 @@ public class AmfiNavImporter {
         BigDecimal nav = new BigDecimal(fields[4].trim());
         LocalDate navDate = LocalDate.parse(fields[5].trim(), DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
 
+        log.debug("Processing line - SchemeCode: {}, Name: {}, NAV: {}, Date: {}", schemeCode, schemeName, nav, navDate);
+
         // Create or update scheme
         createOrUpdateScheme(schemeCode, schemeName, isin, nav, navDate);
 
         // Add NAV history
         NavHistory navHistory = new NavHistory(schemeCode, navDate, nav, "AMFI");
         navBatch.add(navHistory);
+        log.debug("Added to navBatch - SchemeCode: {}, Size now: {}", schemeCode, navBatch.size());
 
         // Keep track of latest NAV for each scheme
         NavUpdateInfo existing = latestNavs.get(schemeCode);
         if (existing == null || navDate.isAfter(existing.date)) {
             latestNavs.put(schemeCode, new NavUpdateInfo(nav, navDate));
+            log.debug("Updated latestNavs for scheme: {} with date: {}", schemeCode, navDate);
         }
     }
 
@@ -183,48 +190,61 @@ public class AmfiNavImporter {
             return;
         }
 
-        log.info("Starting to save batch of {} NAV entries", navBatch.size());
-        Set<LocalDate> uniqueDates = navBatch.stream()
-                .map(NavHistory::getNavDate)
-                .collect(Collectors.toSet());
-        log.info("Unique NAV dates in batch: {}", uniqueDates);
+        log.info("Processing batch of {} NAV entries", navBatch.size());
+        List<NavHistory> successfulSaves = new ArrayList<>();
+        Map<String, String> failedEntries = new HashMap<>();
 
-        // Add debug logging for each NavHistory object
+        // Process each NAV entry individually within the batch
         for (NavHistory nav : navBatch) {
-            log.debug("NavHistory before save - ID: {}, FundId: {}, NavDate: {}, Nav: {}", 
-                nav.getId(), nav.getFundId(), nav.getNavDate(), nav.getNav());
+            try {
+                NavHistory savedNav = navRepo.save(nav);
+                successfulSaves.add(savedNav);
+                log.debug("Successfully saved NAV entry - FundId: {}, Date: {}, Nav: {}", 
+                    nav.getFundId(), nav.getNavDate(), nav.getNav());
+            } catch (Exception e) {
+                String errorMessage = e.getMessage();
+                failedEntries.put(nav.getFundId() + "_" + nav.getNavDate(), errorMessage);
+                log.warn("Failed to save NAV entry - FundId: {}, Date: {}, Error: {}", 
+                    nav.getFundId(), nav.getNavDate(), errorMessage);
+            }
         }
 
-        try {
-            List<NavHistory> savedHistory = navRepo.saveAll(navBatch);
-            log.info("Saved {} NAV history entries", savedHistory.size());
+        // Log summary of the batch processing
+        log.info("Batch processing complete - Success: {}, Failed: {}", 
+            successfulSaves.size(), failedEntries.size());
+
+        if (!failedEntries.isEmpty()) {
+            log.warn("Failed entries summary:");
+            failedEntries.forEach((key, error) -> 
+                log.warn("Entry: {}, Error: {}", key, error));
+        }
+
+        // Update AMFI schemes with latest NAVs for successful entries
+        updateAmfiSchemesWithLatestNavs(successfulSaves, latestNavs);
+    }
+
+    private void updateAmfiSchemesWithLatestNavs(List<NavHistory> successfulSaves, Map<String, NavUpdateInfo> latestNavs) {
+        log.info("Updating AMFI schemes with latest NAVs for {} entries", latestNavs.size());
+        int updatedSchemes = 0;
+        
+        for (NavHistory nav : successfulSaves) {
+            String schemeCode = nav.getFundId().toString();
+            NavUpdateInfo updateInfo = latestNavs.get(schemeCode);
             
-            // Add debug logging for saved entries
-            for (NavHistory saved : savedHistory) {
-                log.debug("NavHistory after save - ID: {}, FundId: {}, NavDate: {}, Nav: {}", 
-                    saved.getId(), saved.getFundId(), saved.getNavDate(), saved.getNav());
+            if (updateInfo != null && updateInfo.date.equals(nav.getNavDate())) {
+                try {
+                    schemeRepo.updateNav(schemeCode, updateInfo.nav, updateInfo.date);
+                    updatedSchemes++;
+                    log.debug("Updated AMFI scheme - Code: {}, Date: {}, NAV: {}", 
+                        schemeCode, updateInfo.date, updateInfo.nav);
+                } catch (Exception e) {
+                    log.error("Failed to update AMFI scheme {}: {}", schemeCode, e.getMessage());
+                }
             }
-
-            // Update AMFI schemes
-            for (Map.Entry<String, NavUpdateInfo> entry : latestNavs.entrySet()) {
-                String schemeCode = entry.getKey();
-                NavUpdateInfo updateInfo = entry.getValue();
-                
-                log.debug("Updating AMFI scheme - Code: {}, Date: {}, NAV: {}", 
-                    schemeCode, updateInfo.date, updateInfo.nav);
-                
-                schemeRepo.updateNav(
-                    schemeCode,
-                    updateInfo.nav,
-                    updateInfo.date
-                );
-            }
-            log.info("Updated {} AMFI schemes with latest NAV", latestNavs.size());
-
-        } catch (Exception e) {
-            log.error("Error saving batch", e);
-            throw e; // Re-throw to trigger transaction rollback
         }
+        
+        log.info("Successfully updated {}/{} AMFI schemes with latest NAV", 
+            updatedSchemes, latestNavs.size());
     }
 
     @Transactional
